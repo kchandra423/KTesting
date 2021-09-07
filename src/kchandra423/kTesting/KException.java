@@ -15,7 +15,7 @@ public class KException extends RuntimeException {
 
     private static String getUnequalMessage(String functionName, Object o, Object output, Object[] input) {
         return "\n\n\n***************\nYour code failed! :(" +
-                "\nCalled function " + functionName + "on "+ o.toString()+" with argument(s) " + Arrays.toString(input) + " and expected to NOT get " +
+                "\nCalled function " + functionName + " on "+ o.toString()+" with argument(s) " + Arrays.toString(input) + " and expected to NOT get " +
                 output.toString() + " but got " + output.toString() + "\n***************\n\n\n";
 
     }
@@ -26,7 +26,7 @@ public class KException extends RuntimeException {
 
     private static String getMessage(String functionName, Object o, Object output, Object expected, Object[] input) {
         return "\n\n\n***************\nYour code failed! :(" +
-                "\nCalled function " + functionName + "on "+ o.toString()+  " with argument(s) " + Arrays.toString(input) + " and expected " +
+                "\nCalled function " + functionName + " on "+ o.toString()+  " with argument(s) " + Arrays.toString(input) + " and expected " +
                 expected.toString() + " but got " + output.toString()+ "\n***************\n\n\n";
     }
 
