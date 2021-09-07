@@ -7,12 +7,11 @@ import java.util.Arrays;
 
 public class KAssertion {
     public static void kAssertTrue(String functionName, Object o, Object... input) {
-
         try {
             Object val = getMethod(functionName, o).invoke(o, input);
 
         if (val.equals(Boolean.FALSE)) {
-                throw new KException(functionName, val, Boolean.TRUE, true, input);
+                throw new KException(functionName, o, val, Boolean.TRUE, true, input);
             } else {
                 System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
             }
@@ -27,7 +26,7 @@ public class KAssertion {
         try {
             Object val = getMethod(functionName, o).invoke(o, input);
             if (val.equals(Boolean.TRUE)) {
-                throw new KException(functionName, val, Boolean.FALSE, true, input);
+                throw new KException(functionName, o, val, Boolean.FALSE, true, input);
             } else {
                 System.out.println(getSuccessMessage(functionName, o, Boolean.FALSE, input));
             }
@@ -41,7 +40,7 @@ public class KAssertion {
         try {
             Object val = getMethod(functionName, o).invoke(o, input);
             if (!val.equals(expected)) {
-                throw new KException(functionName, val, expected, true, input);
+                throw new KException(functionName, o, val, expected, true, input);
             } else {
                 System.out.println(getSuccessMessage(functionName, o, expected, input));
             }
@@ -55,7 +54,7 @@ public class KAssertion {
         try {
             Object val = getMethod(functionName, o).invoke(o, input);
             if (val.equals(expected)) {
-                throw new KException(functionName, val, expected, false, input);
+                throw new KException(functionName, o, val, expected, false, input);
             } else {
                 System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
             }
