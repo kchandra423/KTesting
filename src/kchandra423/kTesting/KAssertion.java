@@ -54,12 +54,37 @@ public class KAssertion {
         }
         for (Method m :
                 obj.getClass().getMethods()) {
-            if (m.getName().equals(methodName) && Arrays.equals(m.getParameterTypes(), params)) {
+            boolean namesMatch = m.getName().equals(methodName);
+            Class[] wrapped = m.getParameterTypes();
+            convertToWrappers(wrapped);
+            boolean paramsMatch = Arrays.equals(wrapped, params);
+            if (namesMatch && paramsMatch) {
                 return m;
             }
         }
         throw new KException(methodName, obj, input);
 //        throw new NoSuchMethodException("Method " + methodName + " not found in" + obj.getClass().toString());
+    }
+    private static void convertToWrappers(Class[] params){
+        for (int i = 0; i < params.length; i++) {
+            if(params[i].equals(boolean.class)){
+                params[i] = Boolean.class;
+            }else if(params[i].equals(char.class)){
+                params[i] = Character.class;
+            }else if(params[i].equals(byte.class)){
+                params[i] = Byte.class;
+            }else if(params[i].equals(short.class)){
+                params[i] = Short.class;
+            }else if(params[i].equals(int.class)){
+                params[i] = Integer.class;
+            }else if(params[i].equals(long.class)){
+                params[i] = Long.class;
+            }else if(params[i].equals(float.class)){
+                params[i] = Float.class;
+            }else if(params[i].equals(double.class)){
+                params[i] = Double.class;
+            }
+        }
     }
 
     private static String getSuccessMessage(String methodName, Object o, Object expected, Object... input) {
