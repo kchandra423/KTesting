@@ -17,7 +17,7 @@ public class KAssertion {
     public static void kAssertEquals(String functionName, Object o, Object expected, Object... input)  {
         Object val = null;
         try {
-            val = getMethod(functionName, o).invoke(o, input);
+            val = getMethod(functionName, o, input).invoke(o, input);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
