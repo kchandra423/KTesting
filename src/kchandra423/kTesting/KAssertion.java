@@ -6,72 +6,60 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class KAssertion {
-    public static void kAssertTrue(String functionName, Object o, Object... input) {
-        try {
-            Object val = getMethod(functionName, o).invoke(o, input);
-
-        if (val.equals(Boolean.FALSE)) {
-                throw new KException(functionName, o, val, Boolean.TRUE, true, input);
-            } else {
-                System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println();
+    public static void kAssertTrue(String functionName, Object o, Object... input)  {
+        kAssertEquals(functionName, o, true, input);
     }
 
-    public static void kAssertFalse(String functionName, Object o, Object... input) {
-        try {
-            Object val = getMethod(functionName, o).invoke(o, input);
-            if (val.equals(Boolean.TRUE)) {
-                throw new KException(functionName, o, val, Boolean.FALSE, true, input);
-            } else {
-                System.out.println(getSuccessMessage(functionName, o, Boolean.FALSE, input));
-            }
-
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    public static void kAssertFalse(String functionName, Object o, Object... input)  {
+        kAssertEquals(functionName, o, false, input);
     }
 
-    public static void kAssertEquals(String functionName, Object o, Object expected, Object... input) {
+    public static void kAssertEquals(String functionName, Object o, Object expected, Object... input)  {
+        Object val = null;
         try {
-            Object val = getMethod(functionName, o).invoke(o, input);
-            if (!val.equals(expected)) {
-                throw new KException(functionName, o, val, expected, true, input);
-            } else {
-                System.out.println(getSuccessMessage(functionName, o, expected, input));
-            }
-
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            val = getMethod(functionName, o).invoke(o, input);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        if (!val.equals(expected)) {
+            throw new KException(functionName, o, val, expected, true, input);
+        } else {
+            System.out.println(getSuccessMessage(functionName, o, expected, input));
+        }
+
+
     }
 
-    public static void kAssertNotEquals(String functionName, Object o, Object expected, Object... input) {
+    public static void kAssertNotEquals(String functionName, Object o, Object expected, Object... input)  {
+        Object val = null;
         try {
-            Object val = getMethod(functionName, o).invoke(o, input);
-            if (val.equals(expected)) {
-                throw new KException(functionName, o, val, expected, false, input);
-            } else {
-                System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
-            }
-
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            val = getMethod(functionName, o, input).invoke(o, input);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+          e.printStackTrace();
+        }
+        if (val.equals(expected)) {
+            throw new KException(functionName, o, val, expected, false, input);
+        } else {
+            System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
         }
     }
+    public static void kAssert(String functionName, Object o, Object... input){
+        getMethod(functionName, o, input);
+    }
 
-    private static Method getMethod(String methodName, Object obj) throws NoSuchMethodException {
+    private static Method getMethod(String methodName, Object obj, Object... input)  {
+        Class[] params = new Class[input.length];
+        for (int i = 0; i < params.length; i++) {
+            params[i] = input[i].getClass();
+        }
         for (Method m :
                 obj.getClass().getMethods()) {
-            if (m.getName().equals(methodName)) {
+            if (m.getName().equals(methodName) && Arrays.equals(m.getParameterTypes(), params) && m.isAccessible()) {
                 return m;
             }
         }
-        throw new NoSuchMethodException("Method " + methodName + " not found in" + obj.getClass().toGenericString());
+        throw new KException(methodName, obj, input);
+//        throw new NoSuchMethodException("Method " + methodName + " not found in" + obj.getClass().toString());
     }
 
     private static String getSuccessMessage(String methodName, Object o, Object expected, Object... input) {
