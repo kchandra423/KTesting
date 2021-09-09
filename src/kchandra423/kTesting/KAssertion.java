@@ -54,7 +54,7 @@ public class KAssertion {
         }
         for (Method m :
                 obj.getClass().getMethods()) {
-            if (m.getName().equals(methodName) && Arrays.equals(m.getParameterTypes(), params) && m.isAccessible()) {
+            if (m.getName().equals(methodName) && Arrays.equals(m.getParameterTypes(), params)) {
                 return m;
             }
         }
