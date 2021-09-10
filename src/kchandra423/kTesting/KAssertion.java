@@ -1,10 +1,8 @@
 package kchandra423.kTesting;
 
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 public class KAssertion {
@@ -26,7 +24,7 @@ public class KAssertion {
         if (!val.equals(expected)) {
             throw new KException(functionName, o, val, expected, true, input);
         } else {
-            System.out.println(getSuccessMessage(functionName, o, expected, input));
+            System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
         }
 
 
@@ -42,7 +40,7 @@ public class KAssertion {
         if (val.equals(expected)) {
             throw new KException(functionName, o, val, expected, false, input);
         } else {
-            System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
+            System.out.println(getAssertionSuccessMessage(functionName, o, Boolean.TRUE, input));
         }
     }
     @Deprecated
@@ -112,7 +110,7 @@ public class KAssertion {
         }
     }
 
-    private static String getSuccessMessage(String methodName, Object o, Object expected, Object... input) {
+    private static String getAssertionSuccessMessage(String methodName, Object o, Object expected, Object... input) {
         return "Called " + methodName + " on " + o.toString() + " with arguments " + Arrays.toString(input) + " and successfully got " + expected.toString();
     }
 }
