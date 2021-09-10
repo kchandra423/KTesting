@@ -7,13 +7,18 @@ public class KException extends RuntimeException {
         super(equal ? getMessage(functionName, o, output, expected, input) : getUnequalMessage(functionName, o, output, input));
     }
 
-    public KException(String functionName, Object o, Object... parameters) {
+    public KException(String functionName, Object o, Class... parameters) {
         super(getFunctionNotFoundMessage(functionName, o, parameters));
     }
 
-    public KException(String message) {
-        super(message);
+    public KException(Class base, Class... params) {
+        super(getConstructorNotFoundMessage(base, params));
     }
+
+    public KException(String className) {
+        super(getClassNotFoundMessage(className));
+    }
+
 
     private static String getUnequalMessage(String functionName, Object o, Object output, Object[] input) {
         return "\n\n\n***************\nYour code failed! :(" +
@@ -22,12 +27,16 @@ public class KException extends RuntimeException {
 
     }
 
-    private static String getFunctionNotFoundMessage(String functionName, Object o, Object... parameters) {
-        Class[] params = new Class[parameters.length];
-        for (int i = 0; i < params.length; i++) {
-            params[i] = parameters[i].getClass();
-        }
-        return "Could not find method/constructor " + functionName + " with parameters " + Arrays.toString(params) + " in " + o.getClass().toString();
+    private static String getFunctionNotFoundMessage(String functionName, Object o, Class... parameters) {
+        return "\n\n\n***************\nCould not find method " + functionName + " with parameters " + Arrays.toString(parameters) + " in " + o.getClass().toString() + "\n***************\n\n\n";
+    }
+
+    private static String getConstructorNotFoundMessage(Class c, Class... parameters) {
+        return "\n\n\n***************\nCould not find constructor with parameters " + Arrays.toString(parameters) + " in " + c.toString() + "\n***************\n\n\n";
+    }
+
+    private static String getClassNotFoundMessage(String className) {
+        return "\n\n\n***************\nCould not find class with name " + className + "\n***************\n\n\n";
     }
 
     private static String getMessage(String functionName, Object o, Object output, Object expected, Object[] input) {

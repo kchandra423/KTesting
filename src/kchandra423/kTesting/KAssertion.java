@@ -1,8 +1,10 @@
 package kchandra423.kTesting;
 
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
 public class KAssertion {
@@ -43,8 +45,30 @@ public class KAssertion {
             System.out.println(getSuccessMessage(functionName, o, Boolean.TRUE, input));
         }
     }
+    @Deprecated
     public static void kAssert(String functionName, Object o, Object... input){
         getMethod(functionName, o, input);
+    }
+    public static void kAssertMethodExists(String functionName, Object o, Class... input){
+        findMethod(functionName, o, input);
+    }
+    public static void kAssertConstructorExists(Class c, Class... input){
+        findConstructor(c, input);
+    }
+    private static void findConstructor(Class c, Class... input){
+        try {
+            c.getConstructor(input);
+        } catch (NoSuchMethodException e) {
+            throw new KException(c, input);
+        }
+    }
+    private static void findMethod(String functionName, Object o, Class... input){
+
+        try {
+            o.getClass().getMethod(functionName, input);
+        } catch (NoSuchMethodException e) {
+            throw new KException(functionName, o, input);
+        }
     }
 
     private static Method getMethod(String methodName, Object obj, Object... input)  {
@@ -52,8 +76,9 @@ public class KAssertion {
         for (int i = 0; i < params.length; i++) {
             params[i] = input[i].getClass();
         }
+        Method[] methods = obj.getClass().getMethods();
         for (Method m :
-                obj.getClass().getMethods()) {
+                methods) {
             boolean namesMatch = m.getName().equals(methodName);
             Class[] wrapped = m.getParameterTypes();
             convertToWrappers(wrapped);
@@ -62,9 +87,9 @@ public class KAssertion {
                 return m;
             }
         }
-        throw new KException(methodName, obj, input);
-//        throw new NoSuchMethodException("Method " + methodName + " not found in" + obj.getClass().toString());
+        return null;
     }
+
     private static void convertToWrappers(Class[] params){
         for (int i = 0; i < params.length; i++) {
             if(params[i].equals(boolean.class)){
