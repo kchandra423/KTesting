@@ -6,15 +6,15 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class KAssertion {
-    public static void kAssertTrue(String functionName, Object o, Object... input)  {
+    public static void kAssertTrue(String functionName, Object o, Object... input) {
         kAssertEquals(functionName, o, true, input);
     }
 
-    public static void kAssertFalse(String functionName, Object o, Object... input)  {
+    public static void kAssertFalse(String functionName, Object o, Object... input) {
         kAssertEquals(functionName, o, false, input);
     }
 
-    public static void kAssertEquals(String functionName, Object o, Object expected, Object... input)  {
+    public static void kAssertEquals(String functionName, Object o, Object expected, Object... input) {
         Object val = null;
         try {
             val = getMethod(functionName, o, input).invoke(o, input);
@@ -30,12 +30,12 @@ public class KAssertion {
 
     }
 
-    public static void kAssertNotEquals(String functionName, Object o, Object expected, Object... input)  {
+    public static void kAssertNotEquals(String functionName, Object o, Object expected, Object... input) {
         Object val = null;
         try {
             val = getMethod(functionName, o, input).invoke(o, input);
         } catch (IllegalAccessException | InvocationTargetException e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
         if (val.equals(expected)) {
             throw new KException(functionName, o, val, expected, false, input);
@@ -43,24 +43,29 @@ public class KAssertion {
             System.out.println(getAssertionSuccessMessage(functionName, o, Boolean.TRUE, input));
         }
     }
+
     @Deprecated
-    public static void kAssert(String functionName, Object o, Object... input){
+    public static void kAssert(String functionName, Object o, Object... input) {
         getMethod(functionName, o, input);
     }
-    public static void kAssertMethodExists(String functionName, Object o, Class... input){
+
+    public static void kAssertMethodExists(String functionName, Object o, Class... input) {
         findMethod(functionName, o, input);
     }
-    public static void kAssertConstructorExists(Class c, Class... input){
+
+    public static void kAssertConstructorExists(Class c, Class... input) {
         findConstructor(c, input);
     }
-    private static void findConstructor(Class c, Class... input){
+
+    private static void findConstructor(Class c, Class... input) {
         try {
             c.getConstructor(input);
         } catch (NoSuchMethodException e) {
             throw new KException(c, input);
         }
     }
-    private static void findMethod(String functionName, Object o, Class... input){
+
+    private static void findMethod(String functionName, Object o, Class... input) {
 
         try {
             o.getClass().getMethod(functionName, input);
@@ -69,18 +74,15 @@ public class KAssertion {
         }
     }
 
-    private static Method getMethod(String methodName, Object obj, Object... input)  {
-        Class[] params = new Class[input.length];
-        for (int i = 0; i < params.length; i++) {
-            params[i] = input[i].getClass();
-        }
+    private static Method getMethod(String methodName, Object obj, Object... input) {
+        Class[] params = toClassArray(input);
         Method[] methods = obj.getClass().getMethods();
         for (Method m :
                 methods) {
             boolean namesMatch = m.getName().equals(methodName);
             Class[] wrapped = m.getParameterTypes();
             convertToWrappers(wrapped);
-            boolean paramsMatch = Arrays.equals(wrapped, params);
+            boolean paramsMatch = isAcceptableParameters(wrapped, params);
             if (namesMatch && paramsMatch) {
                 return m;
             }
@@ -88,26 +90,46 @@ public class KAssertion {
         return null;
     }
 
-    private static void convertToWrappers(Class[] params){
+    private static void convertToWrappers(Class[] params) {
         for (int i = 0; i < params.length; i++) {
-            if(params[i].equals(boolean.class)){
+            if (params[i].equals(boolean.class)) {
                 params[i] = Boolean.class;
-            }else if(params[i].equals(char.class)){
+            } else if (params[i].equals(char.class)) {
                 params[i] = Character.class;
-            }else if(params[i].equals(byte.class)){
+            } else if (params[i].equals(byte.class)) {
                 params[i] = Byte.class;
-            }else if(params[i].equals(short.class)){
+            } else if (params[i].equals(short.class)) {
                 params[i] = Short.class;
-            }else if(params[i].equals(int.class)){
+            } else if (params[i].equals(int.class)) {
                 params[i] = Integer.class;
-            }else if(params[i].equals(long.class)){
+            } else if (params[i].equals(long.class)) {
                 params[i] = Long.class;
-            }else if(params[i].equals(float.class)){
+            } else if (params[i].equals(float.class)) {
                 params[i] = Float.class;
-            }else if(params[i].equals(double.class)){
+            } else if (params[i].equals(double.class)) {
                 params[i] = Double.class;
             }
         }
+    }
+
+    private static Class[] toClassArray(Object[] params) {
+        Class[] classes = new Class[params.length];
+        for (int i = 0; i < params.length; i++) {
+            classes[i] = params[i].getClass();
+        }
+        return classes;
+    }
+
+    private static boolean isAcceptableParameters(Class[] arguments, Class[] input) {
+        if(arguments.length!=input.length){
+            return false;
+        }
+        for (int i = 0; i < arguments.length; i++) {
+            if (!arguments[i].isAssignableFrom(input[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static String getAssertionSuccessMessage(String methodName, Object o, Object expected, Object... input) {
