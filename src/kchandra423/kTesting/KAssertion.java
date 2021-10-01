@@ -172,7 +172,7 @@ public class KAssertion {
 
     private static Object getValue(String functionName, Object o, Object... input) {
         try {
-            return getMethod(functionName, o, toClassArray(input)).invoke(o, input);
+            return getMethod(functionName, o, input).invoke(o, input);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -187,7 +187,7 @@ public class KAssertion {
 //        }
 //    }
 
-    private static Method getMethod(String methodName, Object obj, Class... input) {
+    private static Method getMethod(String methodName, Object obj, Object... input) {
 
         Class[] params = toClassArray(input);
         try {
