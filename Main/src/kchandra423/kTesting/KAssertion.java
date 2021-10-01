@@ -107,7 +107,7 @@ public class KAssertion {
 
     @Deprecated
     public static void kAssert(String functionName, Object o, Object... input) {
-        getMethod(functionName, o, toClassArray(input));
+        getMethod(functionName, o.getClass(), toClassArray(input));
     }
 
     /**
@@ -172,7 +172,7 @@ public class KAssertion {
 
     private static Object getValue(String functionName, Object o, Object... input) {
         try {
-            return getMethod(functionName, o, input).invoke(o, input);
+            return getMethod(functionName, o.getClass(), input).invoke(o, input);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -187,11 +187,11 @@ public class KAssertion {
 //        }
 //    }
 
-    private static Method getMethod(String methodName, Object obj, Object... input) {
+    private static Method getMethod(String methodName, Class c, Object... input) {
 
         Class[] params = toClassArray(input);
         try {
-            Method[] methods = obj.getClass().getDeclaredMethods();
+            Method[] methods = c.getDeclaredMethods();
             for (Method m :
                     methods) {
                 m.setAccessible(true);
@@ -205,10 +205,10 @@ public class KAssertion {
             }
         } catch (Exception e) {
 
-            throw new KExistenceException(methodName, obj, params);
+            throw new KExistenceException(methodName, c, params);
         }
 
-        throw new KExistenceException(methodName, obj, params);
+        throw new KExistenceException(methodName, c, params);
     }
 
     private static void convertToWrappers(Class[] params) {

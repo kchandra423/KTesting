@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class KExistenceException extends KException {
 
-    public KExistenceException(String functionName, Object o, Class... parameters) {
-        super(getFunctionNotFoundMessage(functionName, o.getClass(), parameters));
+    public KExistenceException(String functionName, Class c, Class... parameters) {
+        super(getFunctionNotFoundMessage(functionName, c, parameters));
     }
 
     public KExistenceException(Class c, Class... parameters) {
