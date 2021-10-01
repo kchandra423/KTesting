@@ -2,7 +2,7 @@
   <artifact type="jar" name="KTesting:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/KTesting_jar</output-path>
     <root id="archive" name="KTesting.jar">
-      <element id="module-output" name="KTesting" />
+      <element id="module-output" name="Main" />
     </root>
   </artifact>
 </component>
