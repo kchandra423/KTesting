@@ -4,6 +4,7 @@ package kchandra423.kTesting;
 import kchandra423.kTesting.exceptions.KAssertionException;
 import kchandra423.kTesting.exceptions.KExistenceException;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 /**
  * Handles basic testing. Can be used to assert the outputs of certain methods,
  * or verify the existence of certain methods and objects within a class
+ *
  * @author Kumar Chandra
  * @see KAssertionException
  * @see KExistenceException
@@ -105,7 +107,7 @@ public class KAssertion {
 
     @Deprecated
     public static void kAssert(String functionName, Object o, Object... input) {
-        getMethod(functionName, o, input);
+        getMethod(functionName, o, toClassArray(input));
     }
 
     /**
@@ -117,7 +119,7 @@ public class KAssertion {
      * @throws KExistenceException Throws this exception if the method is not found
      */
     public static void kAssertMethodExists(String functionName, Class c, Class... input) {
-        findMethod(functionName, c, input);
+        getMethod(functionName, c, input);
         System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
     }
 
@@ -133,6 +135,33 @@ public class KAssertion {
         System.out.println(getConstructorExistenceSuccessMessage(c, input));
     }
 
+    public static void kAssertFieldExists(Class c, String fieldName) {
+        getField(c, fieldName);
+        System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
+    }
+
+    public static void kAssertEquals(Object o, String fieldName, Object expected) {
+        Field f = getField(o.getClass(), fieldName);
+        f.setAccessible(true);
+        try {
+            Object val = f.get(o);
+            if (!expected.equals(val)) {
+                throw new KAssertionException(fieldName, o, val, expected);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Field getField(Class c, String fieldName) {
+        try {
+            return c.getField(fieldName);
+        } catch (Exception e) {
+            throw new KExistenceException(c, fieldName);
+        }
+    }
+
+
     private static void findConstructor(Class c, Class... input) {
         try {
             c.getConstructor(input);
@@ -143,34 +172,41 @@ public class KAssertion {
 
     private static Object getValue(String functionName, Object o, Object... input) {
         try {
-            return getMethod(functionName, o, input).invoke(o, input);
+            return getMethod(functionName, o, toClassArray(input)).invoke(o, input);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private static void findMethod(String functionName, Class c, Class... input) {
-        try {
-            c.getMethod(functionName, input);
-        } catch (NoSuchMethodException e) {
-            throw new KExistenceException(functionName, c, input);
-        }
-    }
+//    private static void findMethod(String functionName, Class c, Class... input) {
+//        try {
+//            c.getMethod(functionName, input);
+//        } catch (NoSuchMethodException e) {
+//            throw new KExistenceException(functionName, c, input);
+//        }
+//    }
 
-    private static Method getMethod(String methodName, Object obj, Object... input) {
+    private static Method getMethod(String methodName, Object obj, Class... input) {
+
         Class[] params = toClassArray(input);
-        Method[] methods = obj.getClass().getMethods();
-        for (Method m :
-                methods) {
-            boolean namesMatch = m.getName().equals(methodName);
-            Class[] wrapped = m.getParameterTypes();
-            convertToWrappers(wrapped);
-            boolean paramsMatch = isAcceptableParameters(wrapped, params);
-            if (namesMatch && paramsMatch) {
-                return m;
+        try {
+            Method[] methods = obj.getClass().getMethods();
+            for (Method m :
+                    methods) {
+                boolean namesMatch = m.getName().equals(methodName);
+                Class[] wrapped = m.getParameterTypes();
+                convertToWrappers(wrapped);
+                boolean paramsMatch = isAcceptableParameters(wrapped, params);
+                if (namesMatch && paramsMatch) {
+                    return m;
+                }
             }
+        } catch (Exception e) {
+
+            throw new KExistenceException(methodName, obj, params);
         }
+
         throw new KExistenceException(methodName, obj, params);
     }
 
@@ -226,5 +262,9 @@ public class KAssertion {
 
     private static String getConstructorExistenceSuccessMessage(Class c, Class... parameters) {
         return "Successfully found constructor with parameters " + Arrays.toString(parameters) + " in class " + c.toString();
+    }
+
+    private static String getFieldExistenceSuccessMessage(String fieldName, Class c) {
+        return "Successfully found field " + fieldName + " in class " + c.toString();
     }
 }

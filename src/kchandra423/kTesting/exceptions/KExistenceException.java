@@ -13,12 +13,20 @@ public class KExistenceException extends KException {
         super(getConstructorNotFoundMessage(c, parameters));
     }
 
+    public KExistenceException(Class c, String fieldName) {
+        super(getFieldNotFoundMessage(fieldName, c));
+    }
+
     public KExistenceException(String className) {
         super(getClassNotFoundMessage(className));
     }
 
     private static String getFunctionNotFoundMessage(String functionName, Class c, Class... parameters) {
         return "Could not find method " + functionName + " with parameters " + Arrays.toString(parameters) + " in " + c.toString();
+    }
+
+    private static String getFieldNotFoundMessage(String fieldName, Class c) {
+        return "Could not find field " + fieldName + " in " + c.toString();
     }
 
     private static String getConstructorNotFoundMessage(Class c, Class... parameters) {
