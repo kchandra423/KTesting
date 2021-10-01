@@ -155,7 +155,7 @@ public class KAssertion {
 
     private static Field getField(Class c, String fieldName) {
         try {
-            return c.getField(fieldName);
+            return c.getDeclaredField(fieldName);
         } catch (Exception e) {
             throw new KExistenceException(c, fieldName);
         }
@@ -191,9 +191,10 @@ public class KAssertion {
 
         Class[] params = toClassArray(input);
         try {
-            Method[] methods = obj.getClass().getMethods();
+            Method[] methods = obj.getClass().getDeclaredMethods();
             for (Method m :
                     methods) {
+                m.setAccessible(true);
                 boolean namesMatch = m.getName().equals(methodName);
                 Class[] wrapped = m.getParameterTypes();
                 convertToWrappers(wrapped);
