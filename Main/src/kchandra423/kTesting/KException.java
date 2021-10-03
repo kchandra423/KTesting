@@ -1,4 +1,4 @@
-package kchandra423.kTesting.exceptions;
+package kchandra423.kTesting;
 
 class KException extends RuntimeException {
 

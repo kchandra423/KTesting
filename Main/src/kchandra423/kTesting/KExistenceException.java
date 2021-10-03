@@ -1,23 +1,28 @@
-package kchandra423.kTesting.exceptions;
+package kchandra423.kTesting;
 
 
 import java.util.Arrays;
 
+/**
+ * The exception thrown when an assertion of whether an attribute of a class (constructor, method, field) exists.
+ * Contains details about what was expected to exist, but not found.
+ * @author Kumar Chandra
+ */
 public class KExistenceException extends KException {
 
-    public KExistenceException(String functionName, Class c, Class... parameters) {
+    KExistenceException(String functionName, Class c, Class... parameters) {
         super(getFunctionNotFoundMessage(functionName, c, parameters));
     }
 
-    public KExistenceException(Class c, Class... parameters) {
+    KExistenceException(Class c, Class... parameters) {
         super(getConstructorNotFoundMessage(c, parameters));
     }
 
-    public KExistenceException(Class c, String fieldName) {
+    KExistenceException(Class c, String fieldName) {
         super(getFieldNotFoundMessage(fieldName, c));
     }
 
-    public KExistenceException(String className) {
+    KExistenceException(String className) {
         super(getClassNotFoundMessage(className));
     }
 
