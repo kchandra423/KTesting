@@ -1,8 +1,6 @@
 package kchandra423.kTesting;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Provides some basic utility methods to get classes within a project.
@@ -15,7 +13,7 @@ public class KUtils {
      * Gets a given class within the target code with a given name
      *
      * @param className The name of the class
-     * @param srcFolder The package look through in their src folder, or the src folder itself
+     * @param srcFolder The absolute path of the project (The enclosing folder of the src code if on mac, and the src folder if on windows)
      * @return The class with the given name
      * @throws ClassNotFoundException thrown if the class does not exist within the given folder
      */
