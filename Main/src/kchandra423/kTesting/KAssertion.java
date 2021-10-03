@@ -18,6 +18,16 @@ import java.util.Arrays;
  * @see KExistenceException
  */
 public class KAssertion {
+    private static boolean successMessages = true;
+
+    /**
+     * Specify whether you would like successful assertions to print to the console
+     * @param flag True for messages, false for none
+     */
+    public static void enableSuccessMessages(boolean flag) {
+        successMessages = flag;
+    }
+
     /**
      * Asserts that a given object will return true with the specified function name and parameters.
      *
@@ -58,7 +68,7 @@ public class KAssertion {
         Object val = getValue(functionName, o, input);
         if (!val.equals(expected)) {
             throw new KAssertionException(functionName, o, val, expected, true, input);
-        } else {
+        } else if (successMessages) {
             System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
         }
     }
@@ -77,7 +87,7 @@ public class KAssertion {
         Object val = getValue(functionName, o, input);
         if (val.equals(expected)) {
             throw new KAssertionException(functionName, o, val, expected, false, input);
-        } else {
+        } else if (successMessages) {
             System.out.println(getAssertionSuccessMessage(functionName, o, Boolean.TRUE, input));
         }
     }
@@ -98,6 +108,8 @@ public class KAssertion {
             Object val = f.get(o);
             if (!expected.equals(val)) {
                 throw new KAssertionException(fieldName, o, val, expected);
+            } else if (successMessages) {
+                System.out.println(getFieldAssertionSuccessMessage(fieldName, o, expected));
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -119,7 +131,9 @@ public class KAssertion {
         for (Object expected :
                 expectedOutputs) {
             if (output.equals(expected)) {
-                System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
+                if (successMessages) {
+                    System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
+                }
                 return;
             }
         }
@@ -142,7 +156,8 @@ public class KAssertion {
      */
     public static void kAssertMethodExists(String functionName, Class c, Class... input) {
         getMethod(functionName, c, input);
-        System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
+        if (successMessages)
+            System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
     }
 
     /**
@@ -154,7 +169,8 @@ public class KAssertion {
      */
     public static void kAssertConstructorExists(Class c, Class... input) {
         findConstructor(c, input);
-        System.out.println(getConstructorExistenceSuccessMessage(c, input));
+        if (successMessages)
+            System.out.println(getConstructorExistenceSuccessMessage(c, input));
     }
 
     /**
@@ -166,7 +182,8 @@ public class KAssertion {
      */
     public static void kAssertFieldExists(Class c, String fieldName) {
         getField(c, fieldName);
-        System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
+        if (successMessages)
+            System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
     }
 
 
@@ -250,7 +267,7 @@ public class KAssertion {
         }
     }
 
-    private static Class[] toClassArray(Object[] params) {
+    static Class[] toClassArray(Object[] params) {
         Class[] classes = new Class[params.length];
         for (int i = 0; i < params.length; i++) {
             classes[i] = params[i].getClass();
@@ -268,6 +285,10 @@ public class KAssertion {
             }
         }
         return true;
+    }
+
+    private static String getFieldAssertionSuccessMessage(String fieldName, Object o, Object expected) {
+        return "Accessed " + fieldName + " in " + o.toString() + " and successfully got " + expected.toString();
     }
 
     private static String getAssertionSuccessMessage(String methodName, Object o, Object expected, Object... input) {

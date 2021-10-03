@@ -3,8 +3,12 @@ package kchandra423.kTesting;
 
 import java.util.Arrays;
 
-
-class KAssertionException extends KException {
+/**
+ * The exception thrown when any assertion fails. Will also give information about what the expected and given values were,
+ * as well as the name of the method called if applicable.
+ * @author Kumar Chandra
+ */
+public class KAssertionException extends KException {
     KAssertionException(String functionName, Object o, Object output, Object expected, boolean equal, Object[] input) {
         super(equal ? getMessage(functionName, o, output, expected, input) : getUnequalMessage(functionName, o, output, input));
     }
