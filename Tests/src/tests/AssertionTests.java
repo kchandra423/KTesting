@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import static kchandra423.kTesting.KAssertion.*;
 
 public class AssertionTests {
-    static {
-        KAssertion.enableSuccessMessages(false);
-    }
-
     @Test
     public void testKAssertEqualsPositive() {
         Double d1 = 5.;

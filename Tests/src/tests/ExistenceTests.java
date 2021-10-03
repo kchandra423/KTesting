@@ -1,16 +1,12 @@
 package tests;
 
 import exampleClasses.ExampleClass;
-import kchandra423.kTesting.KAssertion;
 import kchandra423.kTesting.KExistenceException;
 import org.junit.Test;
 
 import static kchandra423.kTesting.KAssertion.*;
 
 public class ExistenceTests {
-    static {
-        KAssertion.enableSuccessMessages(false);
-    }
 
     @Test
     public void testKAssertFieldExistsPositive() {

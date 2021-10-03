@@ -267,7 +267,7 @@ public class KAssertion {
         }
     }
 
-    static Class[] toClassArray(Object[] params) {
+    private static Class[] toClassArray(Object[] params) {
         Class[] classes = new Class[params.length];
         for (int i = 0; i < params.length; i++) {
             classes[i] = params[i].getClass();

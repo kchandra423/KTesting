@@ -5,46 +5,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Provides some basic utility methods to get classes and objects within a project.
+ * Provides some basic utility methods to get classes within a project.
  *
  * @author Kumar Chandra
  */
 public class KUtils {
-    /**
-     * Returns an object of the given type constructed with the given parameters
-     *
-     * @param className The name of the class
-     * @param srcFolder The package look through in their src folder, or the src folder itself
-     * @param params    The parameters to be given to the constructor, can be null
-     * @return An object of the given name constructed with the given parameters
-     * @throws ClassNotFoundException    If the class is not found
-     * @throws NoSuchMethodException     If there is no constructor with the specified parameters
-     * @throws InstantiationException    If the constructor cannot be invoked
-     * @throws InvocationTargetException If the constructor cannot be invoked
-     * @throws IllegalAccessException    If the constructor cannot be invoked
-     */
-    public static Object getObject(String className, String srcFolder, Object... params) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, InvocationTargetException, IllegalAccessException {
-        Class c = getClass(className, srcFolder);
-        Constructor constructor = c.getConstructor(KAssertion.toClassArray(params));
-        constructor.setAccessible(true);
-        return constructor.newInstance(params);
-    }
-
-    /**
-     * Returns an object of the given type constructed with the given parameters
-     *
-     * @param className The name of the class
-     * @param params    The parameters to be given to the constructor, can be null
-     * @return An object of the given name constructed with the given parameters
-     * @throws ClassNotFoundException    If the class is not found
-     * @throws NoSuchMethodException     If there is no constructor with the specified parameters
-     * @throws InstantiationException    If the constructor cannot be invoked
-     * @throws InvocationTargetException If the constructor cannot be invoked
-     * @throws IllegalAccessException    If the constructor cannot be invoked
-     */
-    public static Object getObject(String className, Object... params) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, InvocationTargetException, IllegalAccessException {
-        return getObject(className, getDefaultSrcPath(), params);
-    }
 
     /**
      * Gets a given class within the target code with a given name
@@ -74,7 +39,7 @@ public class KUtils {
      * @return The class with the given name
      * @throws ClassNotFoundException thrown if the class does not exist within the given folder
      */
-    public static Class getCLass(String className) throws ClassNotFoundException {
+    public static Class getClass(String className) throws ClassNotFoundException {
         return getClass(className, getDefaultSrcPath());
     }
 
