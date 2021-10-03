@@ -143,7 +143,7 @@ public class KAssertion {
 
     @Deprecated
     public static void kAssert(String functionName, Object o, Object... input) {
-        getMethod(functionName, o.getClass(), toClassArray(input));
+        getMethod(functionName, o.getClass(),  toClassArray(input));
     }
 
     /**
@@ -154,7 +154,7 @@ public class KAssertion {
      * @param input        All parameters being given to the method
      * @throws KExistenceException Throws this exception if the method is not found
      */
-    public static void kAssertMethodExists(String functionName, Class c, Class... input) {
+    public static void kAssertMethodExists(String functionName, Class<?> c, Class<?>... input) {
         getMethod(functionName, c, input);
         if (successMessages)
             System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
@@ -167,7 +167,7 @@ public class KAssertion {
      * @param input All parameters being given to the constructor
      * @throws KExistenceException Throws this exception if the constructor is not found
      */
-    public static void kAssertConstructorExists(Class c, Class... input) {
+    public static void kAssertConstructorExists(Class<?> c, Class<?>... input) {
         findConstructor(c, input);
         if (successMessages)
             System.out.println(getConstructorExistenceSuccessMessage(c, input));
@@ -180,14 +180,14 @@ public class KAssertion {
      * @param fieldName The name of the field
      * @throws KExistenceException Throws this exception if the field is not found
      */
-    public static void kAssertFieldExists(Class c, String fieldName) {
+    public static void kAssertFieldExists(Class<?> c, String fieldName) {
         getField(c, fieldName);
         if (successMessages)
             System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
     }
 
 
-    private static Field getField(Class c, String fieldName) {
+    private static Field getField(Class<?> c, String fieldName) {
         try {
             return c.getDeclaredField(fieldName);
         } catch (Exception e) {
@@ -196,7 +196,7 @@ public class KAssertion {
     }
 
 
-    private static void findConstructor(Class c, Class... input) {
+    private static void findConstructor(Class<?> c, Class<?>... input) {
         try {
             c.getConstructor(input);
         } catch (NoSuchMethodException e) {
@@ -213,7 +213,7 @@ public class KAssertion {
         return null;
     }
 
-//    private static void findMethod(String functionName, Class c, Class... input) {
+//    private static void findMethod(String functionName, Class<?> c, Class<?>... input) {
 //        try {
 //            c.getMethod(functionName, input);
 //        } catch (NoSuchMethodException e) {
@@ -221,16 +221,15 @@ public class KAssertion {
 //        }
 //    }
 
-    private static Method getMethod(String methodName, Class c, Object... input) {
-
-        Class[] params = toClassArray(input);
+    private static Method getMethod(String methodName, Class<?> c, Object... input) {
+        Class<?>[] params = toClassArray(input);
         try {
             Method[] methods = c.getDeclaredMethods();
             for (Method m :
                     methods) {
                 m.setAccessible(true);
                 boolean namesMatch = m.getName().equals(methodName);
-                Class[] wrapped = m.getParameterTypes();
+                Class<?>[] wrapped = m.getParameterTypes();
                 convertToWrappers(wrapped);
                 boolean paramsMatch = isAcceptableParameters(wrapped, params);
                 if (namesMatch && paramsMatch) {
@@ -245,7 +244,7 @@ public class KAssertion {
         throw new KExistenceException(methodName, c, params);
     }
 
-    private static void convertToWrappers(Class[] params) {
+    private static void convertToWrappers(Class<?>[] params) {
         for (int i = 0; i < params.length; i++) {
             if (params[i].equals(boolean.class)) {
                 params[i] = Boolean.class;
@@ -267,15 +266,15 @@ public class KAssertion {
         }
     }
 
-    private static Class[] toClassArray(Object[] params) {
-        Class[] classes = new Class[params.length];
+    private static Class<?>[] toClassArray(Object[] params) {
+        Class<?>[] classes = new Class<?>[params.length];
         for (int i = 0; i < params.length; i++) {
             classes[i] = params[i].getClass();
         }
         return classes;
     }
 
-    private static boolean isAcceptableParameters(Class[] arguments, Class[] input) {
+    private static boolean isAcceptableParameters(Class<?>[] arguments, Class<?>[] input) {
         if (arguments.length != input.length) {
             return false;
         }
@@ -295,15 +294,15 @@ public class KAssertion {
         return "Called " + methodName + " on " + o.toString() + " with arguments " + Arrays.toString(input) + " and successfully got " + expected.toString();
     }
 
-    private static String getMethodExistenceSuccessMessage(String functionName, Class c, Class... parameters) {
+    private static String getMethodExistenceSuccessMessage(String functionName, Class<?> c, Class<?>... parameters) {
         return "Successfully found function " + functionName + " in class " + c.toString() + " with parameters " + Arrays.toString(parameters);
     }
 
-    private static String getConstructorExistenceSuccessMessage(Class c, Class... parameters) {
+    private static String getConstructorExistenceSuccessMessage(Class<?> c, Class<?>... parameters) {
         return "Successfully found constructor with parameters " + Arrays.toString(parameters) + " in class " + c.toString();
     }
 
-    private static String getFieldExistenceSuccessMessage(String fieldName, Class c) {
+    private static String getFieldExistenceSuccessMessage(String fieldName, Class<?> c) {
         return "Successfully found field " + fieldName + " in class " + c.toString();
     }
 }

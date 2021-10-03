@@ -15,12 +15,12 @@ public class KUtils {
      * @param className The name of the class
      * @param srcFolder The absolute path of the project (The enclosing folder of the src code if on mac, and the src folder if on windows)
      * @return The class with the given name
-     * @throws ClassNotFoundException thrown if the class does not exist within the given folder
+     * @throws KExistenceException thrown if the class does not exist within the given folder
      */
-    public static Class getClass(String className, String srcFolder) throws ClassNotFoundException {
+    public static Class<?> getClass(String className, String srcFolder) {
         String foundClass = getFullyQualifiedName(className, srcFolder);
         if (foundClass == null) {
-            throw new ClassNotFoundException();
+            throw new KExistenceException(className);
         }
         try {
             return Class.forName(foundClass);
@@ -35,9 +35,9 @@ public class KUtils {
      *
      * @param className The name of the class
      * @return The class with the given name
-     * @throws ClassNotFoundException thrown if the class does not exist within the given folder
+     * @throws KExistenceException thrown if the class does not exist within the given folder
      */
-    public static Class getClass(String className) throws ClassNotFoundException {
+    public static Class<?> getClass(String className) {
         return getClass(className, getDefaultSrcPath());
     }
 

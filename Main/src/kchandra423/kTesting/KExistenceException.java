@@ -5,20 +5,21 @@ import java.util.Arrays;
 
 /**
  * The exception thrown when an assertion of whether an attribute of a class (constructor, method, field) exists.
- * Contains details about what was expected to exist, but not found.
+ * Contain details about what was expected to exist, but not found.
+ *
  * @author Kumar Chandra
  */
 public class KExistenceException extends KException {
 
-    KExistenceException(String functionName, Class c, Class... parameters) {
+    KExistenceException(String functionName, Class<?> c, Class<?>... parameters) {
         super(getFunctionNotFoundMessage(functionName, c, parameters));
     }
 
-    KExistenceException(Class c, Class... parameters) {
+    KExistenceException(Class<?> c, Class<?>... parameters) {
         super(getConstructorNotFoundMessage(c, parameters));
     }
 
-    KExistenceException(Class c, String fieldName) {
+    KExistenceException(Class<?> c, String fieldName) {
         super(getFieldNotFoundMessage(fieldName, c));
     }
 
@@ -26,15 +27,15 @@ public class KExistenceException extends KException {
         super(getClassNotFoundMessage(className));
     }
 
-    private static String getFunctionNotFoundMessage(String functionName, Class c, Class... parameters) {
+    private static String getFunctionNotFoundMessage(String functionName, Class<?> c, Class<?>... parameters) {
         return "Could not find method " + functionName + " with parameters " + Arrays.toString(parameters) + " in " + c.toString();
     }
 
-    private static String getFieldNotFoundMessage(String fieldName, Class c) {
+    private static String getFieldNotFoundMessage(String fieldName, Class<?> c) {
         return "Could not find field " + fieldName + " in " + c.toString();
     }
 
-    private static String getConstructorNotFoundMessage(Class c, Class... parameters) {
+    private static String getConstructorNotFoundMessage(Class<?> c, Class<?>... parameters) {
         return "Could not find constructor with parameters " + Arrays.toString(parameters) + " in " + c.toString();
     }
 
