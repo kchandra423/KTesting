@@ -1,9 +1,6 @@
 package kchandra423.kTesting;
 
 
-import kchandra423.kTesting.exceptions.KAssertionException;
-import kchandra423.kTesting.exceptions.KExistenceException;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,13 +8,26 @@ import java.util.Arrays;
 
 /**
  * Handles basic testing. Can be used to assert the outputs of certain methods,
- * or verify the existence of certain methods and objects within a class
+ * the values of certain fields,
+ * or verify the existence of certain methods and constructors within a class
+ * <p>
+ * Note that all values and methods will be looked at regardless of whether they are private
  *
  * @author Kumar Chandra
  * @see KAssertionException
  * @see KExistenceException
  */
 public class KAssertion {
+    private static boolean successMessages = true;
+
+    /**
+     * Specify whether you would like successful assertions to print to the console
+     * @param flag True for messages, false for none
+     */
+    public static void enableSuccessMessages(boolean flag) {
+        successMessages = flag;
+    }
+
     /**
      * Asserts that a given object will return true with the specified function name and parameters.
      *
@@ -58,7 +68,7 @@ public class KAssertion {
         Object val = getValue(functionName, o, input);
         if (!val.equals(expected)) {
             throw new KAssertionException(functionName, o, val, expected, true, input);
-        } else {
+        } else if (successMessages) {
             System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
         }
     }
@@ -77,8 +87,32 @@ public class KAssertion {
         Object val = getValue(functionName, o, input);
         if (val.equals(expected)) {
             throw new KAssertionException(functionName, o, val, expected, false, input);
-        } else {
+        } else if (successMessages) {
             System.out.println(getAssertionSuccessMessage(functionName, o, Boolean.TRUE, input));
+        }
+    }
+
+    /**
+     * Asserts that a given object will have a field with the expected value
+     *
+     * @param o         The object being used
+     * @param fieldName The name of the field to be looked at
+     * @param expected  The expected value of the field
+     * @throws KAssertionException Throws this exception if the field does not have the expected value
+     * @throws KExistenceException Throws this exception if the field is not found
+     */
+    public static void kAssertEquals(Object o, String fieldName, Object expected) {
+        Field f = getField(o.getClass(), fieldName);
+        f.setAccessible(true);
+        try {
+            Object val = f.get(o);
+            if (!expected.equals(val)) {
+                throw new KAssertionException(fieldName, o, val, expected);
+            } else if (successMessages) {
+                System.out.println(getFieldAssertionSuccessMessage(fieldName, o, expected));
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -97,7 +131,9 @@ public class KAssertion {
         for (Object expected :
                 expectedOutputs) {
             if (output.equals(expected)) {
-                System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
+                if (successMessages) {
+                    System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
+                }
                 return;
             }
         }
@@ -120,7 +156,8 @@ public class KAssertion {
      */
     public static void kAssertMethodExists(String functionName, Class c, Class... input) {
         getMethod(functionName, c, input);
-        System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
+        if (successMessages)
+            System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
     }
 
     /**
@@ -128,30 +165,27 @@ public class KAssertion {
      *
      * @param c     The Class being looked at
      * @param input All parameters being given to the constructor
-     * @throws KExistenceException Throws this exception if the method is not found
+     * @throws KExistenceException Throws this exception if the constructor is not found
      */
     public static void kAssertConstructorExists(Class c, Class... input) {
         findConstructor(c, input);
-        System.out.println(getConstructorExistenceSuccessMessage(c, input));
+        if (successMessages)
+            System.out.println(getConstructorExistenceSuccessMessage(c, input));
     }
 
+    /**
+     * Asserts that a field with the given name exists within a class
+     *
+     * @param c         The Class being looked at
+     * @param fieldName The name of the field
+     * @throws KExistenceException Throws this exception if the field is not found
+     */
     public static void kAssertFieldExists(Class c, String fieldName) {
         getField(c, fieldName);
-        System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
+        if (successMessages)
+            System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
     }
 
-    public static void kAssertEquals(Object o, String fieldName, Object expected) {
-        Field f = getField(o.getClass(), fieldName);
-        f.setAccessible(true);
-        try {
-            Object val = f.get(o);
-            if (!expected.equals(val)) {
-                throw new KAssertionException(fieldName, o, val, expected);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static Field getField(Class c, String fieldName) {
         try {
@@ -251,6 +285,10 @@ public class KAssertion {
             }
         }
         return true;
+    }
+
+    private static String getFieldAssertionSuccessMessage(String fieldName, Object o, Object expected) {
+        return "Accessed " + fieldName + " in " + o.toString() + " and successfully got " + expected.toString();
     }
 
     private static String getAssertionSuccessMessage(String methodName, Object o, Object expected, Object... input) {

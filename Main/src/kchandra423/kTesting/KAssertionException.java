@@ -1,19 +1,23 @@
-package kchandra423.kTesting.exceptions;
+package kchandra423.kTesting;
 
 
 import java.util.Arrays;
 
-//why is my head detached
+/**
+ * The exception thrown when any assertion fails. Will also give information about what the expected and given values were,
+ * as well as the name of the method called if applicable.
+ * @author Kumar Chandra
+ */
 public class KAssertionException extends KException {
-    public KAssertionException(String functionName, Object o, Object output, Object expected, boolean equal, Object[] input) {
+    KAssertionException(String functionName, Object o, Object output, Object expected, boolean equal, Object[] input) {
         super(equal ? getMessage(functionName, o, output, expected, input) : getUnequalMessage(functionName, o, output, input));
     }
 
-    public KAssertionException(String functionName, Object o, Object output, Object[] expected, Object[] input) {
+    KAssertionException(String functionName, Object o, Object output, Object[] expected, Object[] input) {
         super(getEqualsAnyMessage(functionName, o, output, expected, input));
     }
 
-    public KAssertionException(String fieldName, Object o, Object value, Object expected) {
+    KAssertionException(String fieldName, Object o, Object value, Object expected) {
         super(getFieldEqualsMessage(fieldName, o, value, expected));
     }
 
