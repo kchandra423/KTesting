@@ -1,7 +1,7 @@
 package tests;
 
-import exampleClasses.ExampleClass;
-import kchandra423.kTesting.KExistenceException;
+import kchandra423.kTesting.*;
+
 import org.junit.Test;
 
 import static kchandra423.kTesting.KAssertion.*;
@@ -10,7 +10,7 @@ public class ExistenceTests {
 
     @Test
     public void testKAssertFieldExistsPositive() {
-        kAssertFieldExists(ExampleClass.class, "noPeeking");
+        KAssertion.kAssertFieldExists(ExampleClass.class, "noPeeking");
     }
 
     @Test(expected = KExistenceException.class)

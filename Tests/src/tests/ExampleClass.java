@@ -1,5 +1,4 @@
-package exampleClasses;
-
+package tests;
 public class ExampleClass {
     private int noPeeking = 0;
     private static int noLooking = 5;

@@ -1,6 +1,6 @@
 package tests;
 
-import kchandra423.kTesting.KUtils;
+import kchandra423.kTesting.*;
 import org.junit.Test;
 
 

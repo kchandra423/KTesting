@@ -1,7 +1,5 @@
 package tests;
 
-import exampleClasses.ExampleClass;
-import kchandra423.kTesting.KAssertion;
 import kchandra423.kTesting.KAssertionException;
 import org.junit.Test;
 

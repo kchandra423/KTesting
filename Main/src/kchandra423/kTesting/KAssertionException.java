@@ -6,11 +6,12 @@ import java.util.Arrays;
 /**
  * The exception thrown when any assertion fails. Will also give information about what the expected and given values were,
  * as well as the name of the method called if applicable.
+ *
  * @author Kumar Chandra
  */
 public class KAssertionException extends KException {
     KAssertionException(String functionName, Object o, Object output, Object expected, boolean equal, Object[] input) {
-        super(equal ? getMessage(functionName, o, output, expected, input) : getUnequalMessage(functionName, o, output, input));
+        super(getMessage(functionName, o, output, expected, equal, input));
     }
 
     KAssertionException(String functionName, Object o, Object output, Object[] expected, Object[] input) {
@@ -21,14 +22,14 @@ public class KAssertionException extends KException {
         super(getFieldEqualsMessage(fieldName, o, value, expected));
     }
 
-    private static String getUnequalMessage(String functionName, Object o, Object output, Object[] input) {
+
+    private static String getMessage(String functionName, Object o, Object output, Object expected, boolean equal, Object... input) {
+        if (equal) {
+            return "Called function " + functionName + " on " + o.toString() + " with argument(s) " + Arrays.toString(input) + " and expected " +
+                    expected.toString() + " but got " + output.toString();
+        }
         return "Called function " + functionName + " on " + o.toString() + " with argument(s) " + Arrays.toString(input) + " and expected to NOT get " +
                 output.toString() + " but got " + output;
-    }
-
-    private static String getMessage(String functionName, Object o, Object output, Object expected, Object[] input) {
-        return "Called function " + functionName + " on " + o.toString() + " with argument(s) " + Arrays.toString(input) + " and expected " +
-                expected.toString() + " but got " + output.toString();
     }
 
     private static String getEqualsAnyMessage(String functionName, Object o, Object output, Object[] expected, Object[] input) {
