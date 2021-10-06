@@ -22,6 +22,7 @@ public class KAssertion {
 
     /**
      * Specify whether you would like successful assertions to print to the console
+     *
      * @param flag True for messages, false for none
      */
     public static void enableSuccessMessages(boolean flag) {
@@ -143,7 +144,7 @@ public class KAssertion {
 
     @Deprecated
     public static void kAssert(String functionName, Object o, Object... input) {
-        getMethod(functionName, o.getClass(),  toClassArray(input));
+        getMethod(functionName, o.getClass(), toClassArray(input));
     }
 
     /**
@@ -213,13 +214,36 @@ public class KAssertion {
         return null;
     }
 
-//    private static void findMethod(String functionName, Class<?> c, Class<?>... input) {
+    //    private static void findMethod(String functionName, Class<?> c, Class<?>... input) {
 //        try {
 //            c.getMethod(functionName, input);
 //        } catch (NoSuchMethodException e) {
 //            throw new KExistenceException(functionName, c, input);
 //        }
 //    }
+    private static Method getMethod(String methodName, Class<?> c, Class<?>... input) {
+//        Class<?>[] params = toClassArray(input);
+        convertToWrappers(input);
+        try {
+            Method[] methods = c.getDeclaredMethods();
+            for (Method m :
+                    methods) {
+                m.setAccessible(true);
+                boolean namesMatch = m.getName().equals(methodName);
+                Class<?>[] wrapped = m.getParameterTypes();
+                convertToWrappers(wrapped);
+                boolean paramsMatch = isAcceptableParameters(wrapped, input);
+                if (namesMatch && paramsMatch) {
+                    return m;
+                }
+            }
+        } catch (Exception e) {
+
+            throw new KExistenceException(methodName, c, input);
+        }
+
+        throw new KExistenceException(methodName, c, input);
+    }
 
     private static Method getMethod(String methodName, Class<?> c, Object... input) {
         Class<?>[] params = toClassArray(input);
