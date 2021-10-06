@@ -20,8 +20,8 @@ public class AssertionTests {
 
         ArrayList<Integer> ints = new ArrayList<>();
         ints.add(1);
-        kAssertEquals("get", ints, 1, 0);
-        kAssertEquals("remove", ints, true, 1);
+        kAssertEquals("get", ints, 1, new Integer(0));
+        kAssertEquals("remove", ints, true,  new Integer(1));
         kAssertEquals("size", ints, 0);
     }
 
@@ -35,7 +35,7 @@ public class AssertionTests {
     public void testKAssertEqualsNegative2() {
         ArrayList<String> lists = new ArrayList<>();
         lists.add("hi!");
-        kAssertEquals("get", lists, "wrong", 0);
+        kAssertEquals("get", lists, "wrong", new Integer(0));
 
     }
 
