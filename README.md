@@ -8,11 +8,15 @@ A basic testing library for testing outputs of methods using reflection
 ***
 ## Why not just use JUnit?
 > Junit is great for testing your own code, but this library was developed
-to be used to test the code of AP Computer Science A student's projects, where the 
-exact implementation and interface of each student's project may vary, so package names of classes may vary.
-This leads to the need to find classes by name, and then reflectively call their methods, which is the use case for this 
-library. Errors thrown by the assertions also specify the name of each method called, making things easier to read
-by beginners. 
+> to be used to test the code of AP Computer Science A student's projects with a GitHub action.
+> This would compile the tester file with every student's project
+> so you don't know the exact fully qualified name of each student's project,
+> so this library finds it for you. Once it is found, you could just use Junit, but since GitHub
+> actions are shown as a tree, you only really need to run one test at a time. Junit is good for
+> running multiple tests at a time, but a little much for just running one, as every test would need to 
+> be put in a separate class without the use of a build tool like ant.
+> Finally the last reason to use this library over JUnit is that the 
+> feedback it gives is much easier for beginner programmers to understand. 
 ***
 ## How to use
 > Statically import any assertions that you want to use. Then, anywhere that you want to assert that a function returns the correct value,

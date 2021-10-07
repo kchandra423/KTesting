@@ -156,7 +156,7 @@ public class KAssertion {
      * @throws KExistenceException Throws this exception if the method is not found
      */
     public static void kAssertMethodExists(String functionName, Class<?> c, Class<?>... input) {
-        getMethod(functionName, c, input);
+        findMethod(functionName, c, input);
         if (successMessages)
             System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
     }
@@ -221,8 +221,7 @@ public class KAssertion {
 //            throw new KExistenceException(functionName, c, input);
 //        }
 //    }
-    private static Method getMethod(String methodName, Class<?> c, Class<?>... input) {
-//        Class<?>[] params = toClassArray(input);
+    private static void findMethod(String methodName, Class<?> c, Class<?>... input) {
         convertToWrappers(input);
         try {
             Method[] methods = c.getDeclaredMethods();
@@ -234,7 +233,7 @@ public class KAssertion {
                 convertToWrappers(wrapped);
                 boolean paramsMatch = isAcceptableParameters(wrapped, input);
                 if (namesMatch && paramsMatch) {
-                    return m;
+                    return;
                 }
             }
         } catch (Exception e) {
@@ -248,7 +247,7 @@ public class KAssertion {
     private static Method getMethod(String methodName, Class<?> c, Object... input) {
         Class<?>[] params = toClassArray(input);
         try {
-            Method[] methods = c.getDeclaredMethods();
+            Method[] methods = c.getMethods();
             for (Method m :
                     methods) {
                 m.setAccessible(true);
