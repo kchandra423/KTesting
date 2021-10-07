@@ -28,6 +28,12 @@ your testing environment. If the test passes, it will print out some information
 > `ArrayList<String> empty = new ArrayList<>();`  
 > `kAssertTrue("isEmpty", empty)` // Will print out success message  
 > `kAssertTrue("contains", empty, "hello")` // Will throw an error
+More examples can be found in the [examples folder](https://github.com/kchandra423/KTesting/tree/master/Examples)
 ***
+### Quirks
+> When using assertions, asserting field variables will be able to view variables regardless of 
+> their access modifier. However, it will not be able to view inherited fields. 
+> On the contrary, asserting values of methods will only be able to view public methods. 
+> However it can view inherited methods.
 > ## How to download
 Navigate to [out/artifacts/KTesting_jar/KTesting.jar](https://github.com/kchandra423/KTesting/blob/master/out/artifacts/KTesting_jar/KTesting.jar) within this repo and download that jar and simply add to your project.
