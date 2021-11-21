@@ -303,7 +303,7 @@ public class KAssertion {
      * @throws KExistenceException Throws this exception if the method is not found
      */
     @Deprecated
-    private static void kAssertMethodExists(String functionName, Class<?> c, Class<?>... input) {
+    public static void kAssertMethodExists(String functionName, Class<?> c, Class<?>... input) {
         findMethod(functionName, c, input);
         if (successMessages)
             System.out.println(getMethodExistenceSuccessMessage(functionName, c, input));
@@ -317,7 +317,7 @@ public class KAssertion {
      * @throws KExistenceException Throws this exception if the constructor is not found
      */
     @Deprecated
-    private static void kAssertConstructorExists(Class<?> c, Class<?>... input) {
+    public static void kAssertConstructorExists(Class<?> c, Class<?>... input) {
         findConstructor(c, input);
         if (successMessages)
             System.out.println(getConstructorExistenceSuccessMessage(c, input));
@@ -331,7 +331,7 @@ public class KAssertion {
      * @throws KExistenceException Throws this exception if the field is not found
      */
     @Deprecated
-    private static void kAssertFieldExists(Class<?> c, String fieldName) {
+    public static void kAssertFieldExists(Class<?> c, String fieldName) {
         getField(c, fieldName);
         if (successMessages)
             System.out.println(getFieldExistenceSuccessMessage(fieldName, c));
