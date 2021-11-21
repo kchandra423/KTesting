@@ -455,21 +455,24 @@ public class KAssertion {
     }
 
     private static String getFieldAssertionSuccessMessage(String fieldName, Object o, Object expected) {
-        return "Accessed " + fieldName + " in " + o.toString() + " and successfully got " + expected.toString();
+        return "Accessed " + fieldName + " in " + KUtils.toString(o) + " and successfully got " + KUtils.toString(expected);
     }
 
     private static String getAssertionSuccessMessage(String methodName, Object o, Object expected, Object... input) {
-        return "Called " + methodName + " on " + o.toString() + " with arguments " + Arrays.toString(input) + " and successfully got " + expected.toString();
+        return "Called " + methodName + " on " + KUtils.toString(o) + " with arguments " + Arrays.toString(input) + " and successfully got " + KUtils.toString(expected);
     }
 
+    @Deprecated
     private static String getMethodExistenceSuccessMessage(String functionName, Class<?> c, Class<?>... parameters) {
         return "Successfully found function " + functionName + " in class " + c.toString() + " with parameters " + Arrays.toString(parameters);
     }
 
+    @Deprecated
     private static String getConstructorExistenceSuccessMessage(Class<?> c, Class<?>... parameters) {
         return "Successfully found constructor with parameters " + Arrays.toString(parameters) + " in class " + c.toString();
     }
 
+    @Deprecated
     private static String getFieldExistenceSuccessMessage(String fieldName, Class<?> c) {
         return "Successfully found field " + fieldName + " in class " + c.toString();
     }
