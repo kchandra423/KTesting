@@ -1,10 +1,14 @@
 package kchandra423.kTesting;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Handles basic testing. Can be used to assert the outputs of certain methods,
@@ -27,6 +31,47 @@ public class KAssertion {
      */
     public static void enableSuccessMessages(boolean flag) {
         successMessages = flag;
+    }
+    /**
+     * Asserts that a given object will print the specified output with the specified function name and parameters.
+     * Not safe to multi-thread!!
+     *
+     * @param functionName The name of the method being called on the object. *Case-sensitive!*
+     * @param o            The object being used
+     * @param expected     The expected value to be printed to the console (or whatever the current system output is)
+     * @param input        The parameters being called on the object. *Order matters!*
+     * @throws KAssertionException Throws this exception if the method does not return true
+     * @throws KExistenceException Throws this exception if the method is not found
+     */
+    public static void kAssertConsoleEquals(String functionName, Object o, String expected, Object... input) {
+        StringBuilder sb = new StringBuilder();
+        File output = new File("KTestingOutput.txt");
+        PrintStream og = System.out;
+        try {
+            System.setOut(new PrintStream(output));
+        } catch (FileNotFoundException e) {
+            throw new KAssertionException(functionName, o, output.toString(), expected, true, input);
+        }
+        getValue(functionName, o, input);
+        Scanner s = null;
+        try {
+            s = new Scanner(output);
+        } catch (FileNotFoundException e) {
+            throw new KAssertionException(functionName, o, output.toString(), expected, true, input);
+        }
+        while (s.hasNextLine()) {
+            sb.append(s.nextLine());
+            sb.append('\n');
+        }
+        String result = sb.toString();
+        System.setOut(og);
+        s.close();
+        output.delete();
+        if (!result.equals(expected)) {
+            throw new KAssertionException(functionName, o, result, expected, true, input);
+        } else if (successMessages) {
+            System.out.println(getAssertionSuccessMessage(functionName, o, expected, input));
+        }
     }
 
     /**

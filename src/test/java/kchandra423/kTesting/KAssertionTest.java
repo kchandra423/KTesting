@@ -159,4 +159,22 @@ class KAssertionTest {
         KAssertion.kAssertEqualsAny("toString", d1, new Object[]{5, 4., "5.0"});
         assertThrows(KAssertionException.class, () -> KAssertion.kAssertEqualsAny("toString", d1, new Object[]{5, 4., "5."}));
     }
+
+    @Test
+    void kAssertConsoleEquals() {
+        KAssertion.kAssertConsoleEquals("printSomething", t, "Something!\n");
+        assertThrows(KAssertionException.class, () ->
+                KAssertion.kAssertConsoleEquals("printSomething", t, "Nothing"));
+
+        assertThrows(KAssertionException.class, () ->
+                KAssertion.kAssertConsoleEquals("printSomething", t, "Something!"));
+
+        KAssertion.kAssertConsoleEquals("printThisThing", t, "This is the thing!1\n\n",1);
+
+        assertThrows(KAssertionException.class, () ->
+                KAssertion.kAssertConsoleEquals("printThisThing", t, "This is the thing!1\n",1));
+
+
+
+    }
 }

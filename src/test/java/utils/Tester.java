@@ -79,5 +79,14 @@ public class Tester {
         return "Example class!";
     }
 
+    public void printSomething() {
+        System.out.println("Something!");
+    }
+
+    public void printThisThing(Object o) {
+        System.out.print("This is the thing!");
+        System.out.println(o.toString() + "\n");
+    }
+
 
 }

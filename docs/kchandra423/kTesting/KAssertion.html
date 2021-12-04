@@ -17,8 +17,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":41,"i11":9,"i12":9,"i13":9,"i14":9,"i15":41,"i16":41,"i17":9,"i18":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -148,7 +148,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -233,6 +233,22 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertConsoleEquals-java.lang.String-java.lang.Object-java.lang.String-java.lang.Object...-">kAssertConsoleEquals</a></span>(java.lang.String&nbsp;functionName,
+                    java.lang.Object&nbsp;o,
+                    java.lang.String&nbsp;expected,
+                    java.lang.Object...&nbsp;input)</code>
+<div class="block">Asserts that a given object will print the specified output with the specified function name and parameters.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertConstructorExists-java.lang.Class-java.lang.Class...-">kAssertConstructorExists</a></span>(java.lang.Class&lt;?&gt;&nbsp;c,
+                        java.lang.Class&lt;?&gt;...&nbsp;input)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertEquals-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object...-">kAssertEquals</a></span>(java.lang.String&nbsp;functionName,
              java.lang.Object&nbsp;o,
              java.lang.Object&nbsp;expected,
@@ -240,7 +256,7 @@ extends java.lang.Object</pre>
 <div class="block">Asserts that a given object will return the expected output with the specified function name and parameters.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertEqualsAny-java.lang.String-java.lang.Object-java.lang.Object:A-java.lang.Object...-">kAssertEqualsAny</a></span>(java.lang.String&nbsp;functionName,
                 java.lang.Object&nbsp;o,
@@ -249,7 +265,7 @@ extends java.lang.Object</pre>
 <div class="block">Asserts that a given object will return the any of the expected values with the specified function name and parameters.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertFalse-java.lang.String-java.lang.Object-java.lang.Object...-">kAssertFalse</a></span>(java.lang.String&nbsp;functionName,
             java.lang.Object&nbsp;o,
@@ -257,7 +273,7 @@ extends java.lang.Object</pre>
 <div class="block">Asserts that a given object will return false with the specified function name and parameters.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertFieldEquals-java.lang.String-java.lang.Object-java.lang.Object-">kAssertFieldEquals</a></span>(java.lang.String&nbsp;fieldName,
                   java.lang.Object&nbsp;o,
@@ -265,7 +281,22 @@ extends java.lang.Object</pre>
 <div class="block">Asserts that a given object will have a field with the expected value</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertFieldExists-java.lang.Class-java.lang.String-">kAssertFieldExists</a></span>(java.lang.Class&lt;?&gt;&nbsp;c,
+                  java.lang.String&nbsp;fieldName)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</td>
+</tr>
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertMethodExists-java.lang.String-java.lang.Class-java.lang.Class...-">kAssertMethodExists</a></span>(java.lang.String&nbsp;functionName,
+                   java.lang.Class&lt;?&gt;&nbsp;c,
+                   java.lang.Class&lt;?&gt;...&nbsp;input)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</td>
+</tr>
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertNotEquals-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object...-">kAssertNotEquals</a></span>(java.lang.String&nbsp;functionName,
                 java.lang.Object&nbsp;o,
@@ -274,7 +305,7 @@ extends java.lang.Object</pre>
 <div class="block">Asserts that a given object will *NOT* return the expected output with the specified function name and parameters.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KAssertion.html#kAssertTrue-java.lang.String-java.lang.Object-java.lang.Object...-">kAssertTrue</a></span>(java.lang.String&nbsp;functionName,
            java.lang.Object&nbsp;o,
@@ -332,6 +363,30 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>flag</code> - True for messages, false for none</dd>
+</dl>
+</li>
+</ul>
+<a name="kAssertConsoleEquals-java.lang.String-java.lang.Object-java.lang.String-java.lang.Object...-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>kAssertConsoleEquals</h4>
+<pre>public static&nbsp;void&nbsp;kAssertConsoleEquals(java.lang.String&nbsp;functionName,
+                                        java.lang.Object&nbsp;o,
+                                        java.lang.String&nbsp;expected,
+                                        java.lang.Object...&nbsp;input)</pre>
+<div class="block">Asserts that a given object will print the specified output with the specified function name and parameters.
+ Not safe to multi-thread!!</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The name of the method being called on the object. *Case-sensitive!*</dd>
+<dd><code>o</code> - The object being used</dd>
+<dd><code>expected</code> - The expected value to be printed to the console (or whatever the current system output is)</dd>
+<dd><code>input</code> - The parameters being called on the object. *Order matters!*</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../kchandra423/kTesting/KAssertionException.html" title="class in kchandra423.kTesting">KAssertionException</a></code> - Throws this exception if the method does not return true</dd>
+<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - Throws this exception if the method is not found</dd>
 </dl>
 </li>
 </ul>
@@ -631,7 +686,7 @@ extends java.lang.Object</pre>
 <a name="kAssertEqualsAny-java.lang.String-java.lang.Object-java.lang.Object:A-java.lang.Object...-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>kAssertEqualsAny</h4>
 <pre>public static&nbsp;void&nbsp;kAssertEqualsAny(java.lang.String&nbsp;functionName,
@@ -648,6 +703,68 @@ extends java.lang.Object</pre>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="../../kchandra423/kTesting/KAssertionException.html" title="class in kchandra423.kTesting">KAssertionException</a></code> - Throws this exception if the method does not return a value in the expected outputs</dd>
 <dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - Throws this exception if the method is not found</dd>
+</dl>
+</li>
+</ul>
+<a name="kAssertMethodExists-java.lang.String-java.lang.Class-java.lang.Class...-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>kAssertMethodExists</h4>
+<pre>@Deprecated
+public static&nbsp;void&nbsp;kAssertMethodExists(java.lang.String&nbsp;functionName,
+                                                   java.lang.Class&lt;?&gt;&nbsp;c,
+                                                   java.lang.Class&lt;?&gt;...&nbsp;input)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+<div class="block">Asserts that a method with the given parameters exists within a class</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The name of the function</dd>
+<dd><code>c</code> - The Class being looked at</dd>
+<dd><code>input</code> - All parameters being given to the method</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - Throws this exception if the method is not found</dd>
+</dl>
+</li>
+</ul>
+<a name="kAssertConstructorExists-java.lang.Class-java.lang.Class...-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>kAssertConstructorExists</h4>
+<pre>@Deprecated
+public static&nbsp;void&nbsp;kAssertConstructorExists(java.lang.Class&lt;?&gt;&nbsp;c,
+                                                        java.lang.Class&lt;?&gt;...&nbsp;input)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+<div class="block">Asserts that a constructor with the given parameters exists within a class</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>c</code> - The Class being looked at</dd>
+<dd><code>input</code> - All parameters being given to the constructor</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - Throws this exception if the constructor is not found</dd>
+</dl>
+</li>
+</ul>
+<a name="kAssertFieldExists-java.lang.Class-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>kAssertFieldExists</h4>
+<pre>@Deprecated
+public static&nbsp;void&nbsp;kAssertFieldExists(java.lang.Class&lt;?&gt;&nbsp;c,
+                                                  java.lang.String&nbsp;fieldName)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+<div class="block">Asserts that a field with the given name exists within a class</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>c</code> - The Class being looked at</dd>
+<dd><code>fieldName</code> - The name of the field</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - Throws this exception if the field is not found</dd>
 </dl>
 </li>
 </ul>
