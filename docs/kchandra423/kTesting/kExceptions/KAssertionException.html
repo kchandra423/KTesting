@@ -149,21 +149,27 @@ extends java.lang.RuntimeException</pre>
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KAssertionException.html#KAssertionException-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object-">KAssertionException</a></span>(java.lang.String&nbsp;fieldName,
                    java.lang.Object&nbsp;o,
                    java.lang.Object&nbsp;value,
-                   java.lang.Object&nbsp;expected)</code>&nbsp;</td>
+                   java.lang.Object&nbsp;expected)</code>
+<div class="block">Throws an exception for a field not holding the correct value.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KAssertionException.html#KAssertionException-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object:A-java.lang.Object:A-">KAssertionException</a></span>(java.lang.String&nbsp;functionName,
                    java.lang.Object&nbsp;o,
                    java.lang.Object&nbsp;output,
                    java.lang.Object[]&nbsp;expected,
-                   java.lang.Object[]&nbsp;input)</code>&nbsp;</td>
+                   java.lang.Object[]&nbsp;input)</code>
+<div class="block">Throws an exception for a function not returning the one of the correct outputs.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KAssertionException.html#KAssertionException-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object-java.lang.Object:A-">KAssertionException</a></span>(java.lang.String&nbsp;functionName,
                    java.lang.Object&nbsp;o,
                    java.lang.Object&nbsp;output,
                    java.lang.Object&nbsp;expected,
-                   java.lang.Object[]&nbsp;input)</code>&nbsp;</td>
+                   java.lang.Object[]&nbsp;input)</code>
+<div class="block">Throws an exception for a function not returning the correct output.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -213,6 +219,15 @@ extends java.lang.RuntimeException</pre>
                            java.lang.Object&nbsp;output,
                            java.lang.Object&nbsp;expected,
                            java.lang.Object[]&nbsp;input)</pre>
+<div class="block">Throws an exception for a function not returning the correct output.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The function that failed</dd>
+<dd><code>o</code> - The object used</dd>
+<dd><code>output</code> - The output of the function</dd>
+<dd><code>expected</code> - The expected output</dd>
+<dd><code>input</code> - The inputs given</dd>
+</dl>
 </li>
 </ul>
 <a name="KAssertionException-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object:A-java.lang.Object:A-">
@@ -226,6 +241,15 @@ extends java.lang.RuntimeException</pre>
                            java.lang.Object&nbsp;output,
                            java.lang.Object[]&nbsp;expected,
                            java.lang.Object[]&nbsp;input)</pre>
+<div class="block">Throws an exception for a function not returning the one of the correct outputs.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The function that failed</dd>
+<dd><code>o</code> - The object used</dd>
+<dd><code>output</code> - All of the possible outputs</dd>
+<dd><code>expected</code> - The expected output</dd>
+<dd><code>input</code> - The inputs given</dd>
+</dl>
 </li>
 </ul>
 <a name="KAssertionException-java.lang.String-java.lang.Object-java.lang.Object-java.lang.Object-">
@@ -238,6 +262,14 @@ extends java.lang.RuntimeException</pre>
                            java.lang.Object&nbsp;o,
                            java.lang.Object&nbsp;value,
                            java.lang.Object&nbsp;expected)</pre>
+<div class="block">Throws an exception for a field not holding the correct value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fieldName</code> - The field being looked at</dd>
+<dd><code>o</code> - The object used</dd>
+<dd><code>value</code> - The actual value</dd>
+<dd><code>expected</code> - The expected value</dd>
+</dl>
 </li>
 </ul>
 </li>

@@ -184,7 +184,10 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kAssertions/KAssert.html#kAssertConsoleEqualsAny-java.lang.String-java.lang.String:A-java.lang.Object-java.lang.Object...-">kAssertConsoleEqualsAny</a></span>(java.lang.String&nbsp;functionName,
                        java.lang.String[]&nbsp;expected,
                        java.lang.Object&nbsp;o,
-                       java.lang.Object...&nbsp;input)</code>&nbsp;</td>
+                       java.lang.Object...&nbsp;input)</code>
+<div class="block">Assert that a given object will print to the console the any of the specified outputs
+ when the specified function is called with the given parameters.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static void</code></td>
@@ -192,7 +195,10 @@ extends java.lang.Object</pre>
                        java.lang.String[]&nbsp;trim,
                        java.lang.String[]&nbsp;expected,
                        java.lang.Object&nbsp;o,
-                       java.lang.Object...&nbsp;input)</code>&nbsp;</td>
+                       java.lang.Object...&nbsp;input)</code>
+<div class="block">Assert that a given object will print to the console the any of the specified outputs
+ when the specified function is called with the given parameters.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
@@ -246,7 +252,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kAssertions/KAssert.html#successMessagesEnabled--">successMessagesEnabled</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kAssertions/KAssert.html#successMessagesEnabled--">successMessagesEnabled</a></span>()</code>
+<div class="block">Returns whether assertion messages are currently enabled</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -308,6 +316,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>successMessagesEnabled</h4>
 <pre>public static&nbsp;boolean&nbsp;successMessagesEnabled()</pre>
+<div class="block">Returns whether assertion messages are currently enabled</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Whether assertion messages are enabled</dd>
+</dl>
 </li>
 </ul>
 <a name="kAssertConsoleEquals-java.lang.String-java.lang.Object-java.lang.String-java.lang.Object...-">
@@ -321,7 +334,7 @@ extends java.lang.Object</pre>
                                         java.lang.String&nbsp;expected,
                                         java.lang.Object...&nbsp;input)</pre>
 <div class="block">Asserts that a given object will print the specified output with the specified function name and parameters.
- Not safe to multi-thread!!</div>
+ Not safe to multi-thread!! Trim set as \n, \t, and spaces</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>functionName</code> - The name of the method being called on the object. *Case-sensitive!*</dd>
@@ -353,7 +366,7 @@ extends java.lang.Object</pre>
 <dd><code>o</code> - The object being used</dd>
 <dd><code>expected</code> - The expected value to be printed to the console (or whatever the current system output is)</dd>
 <dd><code>input</code> - The parameters being called on the object. *Order matters!*</dd>
-<dd><code>trim</code> - The set of strings that should be trimmed from the string</dd>
+<dd><code>trim</code> - The set of strings that should be trimmed from the console output</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="../../../kchandra423/kTesting/kExceptions/KAssertionException.html" title="class in kchandra423.kTesting.kExceptions">KAssertionException</a></code> - Throws this exception if the method does not return true</dd>
 <dd><code><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html" title="class in kchandra423.kTesting.kExceptions">KExistenceException</a></code> - Throws this exception if the method is not found</dd>
@@ -370,6 +383,15 @@ extends java.lang.Object</pre>
                                            java.lang.String[]&nbsp;expected,
                                            java.lang.Object&nbsp;o,
                                            java.lang.Object...&nbsp;input)</pre>
+<div class="block">Assert that a given object will print to the console the any of the specified outputs
+ when the specified function is called with the given parameters. Trim set for \t, \n, and spaces</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The name of the function being called</dd>
+<dd><code>expected</code> - An array of possible outputs</dd>
+<dd><code>o</code> - The Object being called</dd>
+<dd><code>input</code> - The parameters of the given function/</dd>
+</dl>
 </li>
 </ul>
 <a name="kAssertConsoleEqualsAny-java.lang.String-java.lang.String:A-java.lang.String:A-java.lang.Object-java.lang.Object...-">
@@ -383,6 +405,16 @@ extends java.lang.Object</pre>
                                            java.lang.String[]&nbsp;expected,
                                            java.lang.Object&nbsp;o,
                                            java.lang.Object...&nbsp;input)</pre>
+<div class="block">Assert that a given object will print to the console the any of the specified outputs
+ when the specified function is called with the given parameters. Output is trimmed with the specified trim characters</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The name of the function being called</dd>
+<dd><code>expected</code> - An array of possible outputs</dd>
+<dd><code>trim</code> - All the strings to be trimmed from the output</dd>
+<dd><code>o</code> - The Object being called</dd>
+<dd><code>input</code> - The parameters of the given function/</dd>
+</dl>
 </li>
 </ul>
 <a name="kAssertTrue-java.lang.String-java.lang.Object-java.lang.Object...-">

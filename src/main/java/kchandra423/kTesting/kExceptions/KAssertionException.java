@@ -22,19 +22,25 @@ public class KAssertionException extends KException {
     public KAssertionException(String functionName, Object o, Object output, Object expected, Object[] input) {
         super(getMessage(functionName, o, output, expected, input));
     }
-
     /**
-     * Throws an exception for a func
-     * @param functionName
-     * @param o
-     * @param output
-     * @param expected
-     * @param input
+     * Throws an exception for a function not returning the one of the correct outputs.
+     * @param functionName The function that failed
+     * @param o The object used
+     * @param output All of the possible outputs
+     * @param expected The expected output
+     * @param input The inputs given
      */
     public KAssertionException(String functionName, Object o, Object output, Object[] expected, Object[] input) {
         super(getEqualsAnyMessage(functionName, o, output, expected, input));
     }
 
+    /**
+     * Throws an exception for a field not holding the correct value.
+     * @param fieldName The field being looked at
+     * @param o The object used
+     * @param value The actual value
+     * @param expected The expected value
+     */
     public KAssertionException(String fieldName, Object o, Object value, Object expected) {
         super(getFieldEqualsMessage(fieldName, o, value, expected));
     }

@@ -148,7 +148,9 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#callTests-java.lang.Class-java.lang.String-">callTests</a></span>(java.lang.Class&lt;?&gt;&nbsp;testClass,
-         java.lang.String&nbsp;functionName)</code>&nbsp;</td>
+         java.lang.String&nbsp;functionName)</code>
+<div class="block">Calls the given test within this class with the specified name.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.lang.Class&lt;?&gt;</code></td>
@@ -165,7 +167,10 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#toString-java.lang.Object-">toString</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#toString-java.lang.Object-">toString</a></span>(java.lang.Object&nbsp;o)</code>
+<div class="block">Better to string method that either calls an objects to string method or the respective Arrays.toString
+ method</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -217,11 +222,16 @@ extends java.lang.Object</pre>
                       throws java.lang.NoSuchMethodException,
                              java.lang.reflect.InvocationTargetException,
                              java.lang.IllegalAccessException</pre>
+<div class="block">Calls the given test within this class with the specified name. Testing methods
+ must be static, void, and take no parameters. They also can not be named main.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>testClass</code> - The class to call the tests from</dd>
+<dd><code>functionName</code> - The name of the function to be called</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.lang.NoSuchMethodException</code></dd>
-<dd><code>java.lang.reflect.InvocationTargetException</code></dd>
-<dd><code>java.lang.IllegalAccessException</code></dd>
+<dd><code>java.lang.NoSuchMethodException</code> - If the method does not exist</dd>
+<dd><code>java.lang.reflect.InvocationTargetException</code> - If the method cannot be called</dd>
+<dd><code>java.lang.IllegalAccessException</code> - If the method cannot be called</dd>
 </dl>
 </li>
 </ul>
@@ -270,6 +280,14 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>toString</h4>
 <pre>public static&nbsp;java.lang.String&nbsp;toString(java.lang.Object&nbsp;o)</pre>
+<div class="block">Better to string method that either calls an objects to string method or the respective Arrays.toString
+ method</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>o</code> - The object being used</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The string representation of that object.</dd>
+</dl>
 </li>
 </ul>
 </li>

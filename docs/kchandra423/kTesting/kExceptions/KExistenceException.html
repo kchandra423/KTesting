@@ -147,19 +147,27 @@ extends java.lang.RuntimeException</pre>
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html#KExistenceException-java.lang.Class-java.lang.Class...-">KExistenceException</a></span>(java.lang.Class&lt;?&gt;&nbsp;c,
-                   java.lang.Class&lt;?&gt;...&nbsp;parameters)</code>&nbsp;</td>
+                   java.lang.Class&lt;?&gt;...&nbsp;parameters)</code>
+<div class="block">Throws an exception for a constructor within a class not existing</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html#KExistenceException-java.lang.Class-java.lang.String-">KExistenceException</a></span>(java.lang.Class&lt;?&gt;&nbsp;c,
-                   java.lang.String&nbsp;fieldName)</code>&nbsp;</td>
+                   java.lang.String&nbsp;fieldName)</code>
+<div class="block">Throws ane exception for a field not being found within a class</div>
+</td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html#KExistenceException-java.lang.String-">KExistenceException</a></span>(java.lang.String&nbsp;className)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html#KExistenceException-java.lang.String-">KExistenceException</a></span>(java.lang.String&nbsp;className)</code>
+<div class="block">Throws an exception for a class not being able to be loaded</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../kchandra423/kTesting/kExceptions/KExistenceException.html#KExistenceException-java.lang.String-java.lang.Class-java.lang.Class...-">KExistenceException</a></span>(java.lang.String&nbsp;functionName,
                    java.lang.Class&lt;?&gt;&nbsp;c,
-                   java.lang.Class&lt;?&gt;...&nbsp;parameters)</code>&nbsp;</td>
+                   java.lang.Class&lt;?&gt;...&nbsp;parameters)</code>
+<div class="block">Throws an exception for a method with the given parameters not existing</div>
+</td>
 </tr>
 </table>
 </li>
@@ -207,6 +215,13 @@ extends java.lang.RuntimeException</pre>
 <pre>public&nbsp;KExistenceException(java.lang.String&nbsp;functionName,
                            java.lang.Class&lt;?&gt;&nbsp;c,
                            java.lang.Class&lt;?&gt;...&nbsp;parameters)</pre>
+<div class="block">Throws an exception for a method with the given parameters not existing</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>functionName</code> - The name of the function</dd>
+<dd><code>c</code> - The class being used</dd>
+<dd><code>parameters</code> - The parameter types expected</dd>
+</dl>
 </li>
 </ul>
 <a name="KExistenceException-java.lang.Class-java.lang.Class...-">
@@ -217,6 +232,12 @@ extends java.lang.RuntimeException</pre>
 <h4>KExistenceException</h4>
 <pre>public&nbsp;KExistenceException(java.lang.Class&lt;?&gt;&nbsp;c,
                            java.lang.Class&lt;?&gt;...&nbsp;parameters)</pre>
+<div class="block">Throws an exception for a constructor within a class not existing</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>c</code> - The class being used</dd>
+<dd><code>parameters</code> - The parameters of the constructor that could not be found</dd>
+</dl>
 </li>
 </ul>
 <a name="KExistenceException-java.lang.Class-java.lang.String-">
@@ -227,6 +248,12 @@ extends java.lang.RuntimeException</pre>
 <h4>KExistenceException</h4>
 <pre>public&nbsp;KExistenceException(java.lang.Class&lt;?&gt;&nbsp;c,
                            java.lang.String&nbsp;fieldName)</pre>
+<div class="block">Throws ane exception for a field not being found within a class</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>c</code> - The class being looked at</dd>
+<dd><code>fieldName</code> - The name of the field</dd>
+</dl>
 </li>
 </ul>
 <a name="KExistenceException-java.lang.String-">
@@ -236,6 +263,11 @@ extends java.lang.RuntimeException</pre>
 <li class="blockList">
 <h4>KExistenceException</h4>
 <pre>public&nbsp;KExistenceException(java.lang.String&nbsp;className)</pre>
+<div class="block">Throws an exception for a class not being able to be loaded</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>className</code> - The fully qualified name of the class</dd>
+</dl>
 </li>
 </ul>
 </li>
