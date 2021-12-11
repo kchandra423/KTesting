@@ -11,10 +11,26 @@ import java.util.Arrays;
  * @author Kumar Chandra
  */
 public class KAssertionException extends KException {
+    /**
+     * Throws an exception for a function not returning the correct output.
+     * @param functionName The function that failed
+     * @param o The object used
+     * @param output The output of the function
+     * @param expected The expected output
+     * @param input The inputs given
+     */
     public KAssertionException(String functionName, Object o, Object output, Object expected, Object[] input) {
         super(getMessage(functionName, o, output, expected, input));
     }
 
+    /**
+     * Throws an exception for a func
+     * @param functionName
+     * @param o
+     * @param output
+     * @param expected
+     * @param input
+     */
     public KAssertionException(String functionName, Object o, Object output, Object[] expected, Object[] input) {
         super(getEqualsAnyMessage(functionName, o, output, expected, input));
     }
@@ -28,11 +44,6 @@ public class KAssertionException extends KException {
         return "Called function/field " + functionName + " on " + KUtils.toString(o) + " with argument(s) " + Arrays.toString(input) + " and expected " +
                 KUtils.toString(expected) + " but got " + KUtils.toString(output);
     }
-
-//    private static String getUnequalMessage(String functionName, Object o, Object output, Object expected, Object... input) {
-//        return "Called function " + functionName + " on " + toString(o) + " with argument(s) " + Arrays.toString(input) + " and expected to NOT get " +
-//                toString(expected) + " but got " + toString(output);
-//    }
 
     private static String getEqualsAnyMessage(String functionName, Object o, Object output, Object[] expected, Object[] input) {
         return "Called function " + functionName + " on " + KUtils.toString(o) + " with argument(s) " + Arrays.toString(input) + " and expected to get any value within " +

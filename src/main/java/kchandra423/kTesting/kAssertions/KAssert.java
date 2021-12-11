@@ -26,13 +26,18 @@ public class KAssert {
         successMessages = flag;
     }
 
+    /**
+     * Returns whether assertion messages are currently enabled
+     *
+     * @return Whether assertion messages are enabled
+     */
     public static boolean successMessagesEnabled() {
         return successMessages;
     }
 
     /**
      * Asserts that a given object will print the specified output with the specified function name and parameters.
-     * Not safe to multi-thread!!
+     * Not safe to multi-thread!! Trim set as \n, \t, and spaces
      *
      * @param functionName The name of the method being called on the object. *Case-sensitive!*
      * @param o            The object being used
@@ -53,7 +58,7 @@ public class KAssert {
      * @param o            The object being used
      * @param expected     The expected value to be printed to the console (or whatever the current system output is)
      * @param input        The parameters being called on the object. *Order matters!*
-     * @param trim         The set of strings that should be trimmed from the string
+     * @param trim         The set of strings that should be trimmed from the console output
      * @throws KAssertionException Throws this exception if the method does not return true
      * @throws KExistenceException Throws this exception if the method is not found
      */
@@ -61,10 +66,29 @@ public class KAssert {
         Assertion.kAssert(expected, new ConsoleAssertion(functionName, o, trim, input));
     }
 
+    /**
+     * Assert that a given object will print to the console the any of the specified outputs
+     * when the specified function is called with the given parameters. Trim set for \t, \n, and spaces
+     *
+     * @param functionName The name of the function being called
+     * @param expected     An array of possible outputs
+     * @param o            The Object being called
+     * @param input        The parameters of the given function/
+     */
     public static void kAssertConsoleEqualsAny(String functionName, String[] expected, Object o, Object... input) {
         kAssertConsoleEqualsAny(functionName, new String[]{"\n", "\t", " "}, expected, o, input);
     }
 
+    /**
+     * Assert that a given object will print to the console the any of the specified outputs
+     * when the specified function is called with the given parameters. Output is trimmed with the specified trim characters
+     *
+     * @param functionName The name of the function being called
+     * @param expected     An array of possible outputs
+     * @param trim         All the strings to be trimmed from the output
+     * @param o            The Object being called
+     * @param input        The parameters of the given function/
+     */
     public static void kAssertConsoleEqualsAny(String functionName, String[] trim, String[] expected, Object o, Object... input) {
         Assertion.kAssertAny(expected, new ConsoleAssertion(functionName, o, trim, input));
     }

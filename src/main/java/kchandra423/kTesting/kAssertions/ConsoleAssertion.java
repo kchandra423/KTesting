@@ -13,6 +13,36 @@ class ConsoleAssertion extends MethodAssertion {
         this.trim = trim;
     }
 
+    @Override
+    public Object getOutput() {
+        StringBuilder sb = new StringBuilder();
+        File output = new File("KTestingOutput.txt");
+        PrintStream og = System.out;
+        try {
+            System.setOut(new PrintStream(output));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        super.getOutput();
+        Scanner s;
+        try {
+            s = new Scanner(output);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        while (s.hasNextLine()) {
+            sb.append(s.nextLine());
+            sb.append('\n');
+        }
+        String result = sb.toString();
+        System.setOut(og);
+        s.close();
+        output.delete();
+        return trim(result, trim);
+    }
+
     private static String trim(String text, String[] trimBy) {
         int beginIndex = 0;
         int endIndex = text.length();
@@ -47,35 +77,5 @@ class ConsoleAssertion extends MethodAssertion {
             }
         }
         return "";
-    }
-
-    @Override
-    public Object getOutput() {
-        StringBuilder sb = new StringBuilder();
-        File output = new File("KTestingOutput.txt");
-        PrintStream og = System.out;
-        try {
-            System.setOut(new PrintStream(output));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-        super.getOutput();
-        Scanner s;
-        try {
-            s = new Scanner(output);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-        while (s.hasNextLine()) {
-            sb.append(s.nextLine());
-            sb.append('\n');
-        }
-        String result = sb.toString();
-        System.setOut(og);
-        s.close();
-        output.delete();
-        return trim(result, trim);
     }
 }

@@ -14,7 +14,15 @@ import java.util.Arrays;
  * @author Kumar Chandra
  */
 public class KUtils {
-
+    /**
+     * Calls the given test within this class with the specified name. Testing methods
+     * must be static, void, and take no parameters. They also can not be named main.
+     * @param testClass The class to call the tests from
+     * @param functionName The name of the function to be called
+     * @throws NoSuchMethodException If the method does not exist
+     * @throws InvocationTargetException If the method cannot be called
+     * @throws IllegalAccessException If the method cannot be called
+     */
     public static void callTests(Class<?> testClass, String functionName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         if (functionName == null || functionName.equals("")) {
             Method[] methods = testClass.getMethods();
@@ -89,6 +97,12 @@ public class KUtils {
         return null;
     }
 
+    /**
+     * Better to string method that either calls an objects to string method or the respective Arrays.toString
+     * method
+     * @param o The object being used
+     * @return The string representation of that object.
+     */
     public static String toString(Object o) {
         if (o.getClass().isArray()) {
             if (o instanceof int[]) {
