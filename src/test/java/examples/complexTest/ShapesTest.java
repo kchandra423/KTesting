@@ -3,27 +3,13 @@ package examples.complexTest;
 import kchandra423.kTesting.KUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
-import static kchandra423.kTesting.KAssertion.*;
+import static kchandra423.kTesting.kAssertions.KAssert.*;
 
 public class ShapesTest {
 
     public static void main(String[] args) throws Exception {
-        String choice = args[0];
-        if (choice.equals("all")) {
-            Method[] methods = ShapesTest.class.getMethods();
-            for (Method m :
-                    methods) {
-                if (!m.getName().equals("main") && Modifier.isPublic(m.getModifiers()) && Modifier.isStatic(m.getModifiers())) {
-                    m.invoke(null);
-                }
-            }
-        } else {
-            Method m = ShapesTest.class.getMethod(choice);
-            m.invoke(null);
-        }
+        KUtils.callTests(ShapesTest.class, null);
     }
 
     public static void existsShape() {

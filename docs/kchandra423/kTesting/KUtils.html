@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -36,7 +36,8 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <ul class="navList" title="Navigation">
-<li><a href="../../kchandra423/kTesting/package-summary.html">Package</a></li>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
 <li class="navBarCell1Rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
 <li><a href="../../deprecated-list.html">Deprecated</a></li>
@@ -46,7 +47,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li>Prev&nbsp;Class</li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -145,16 +146,30 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#callTests-java.lang.Class-java.lang.String-">callTests</a></span>(java.lang.Class&lt;?&gt;&nbsp;testClass,
+         java.lang.String&nbsp;functionName)</code>
+<div class="block">Calls the given test within this class with the specified name.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.lang.Class&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#getClass-java.lang.String-">getClass</a></span>(java.lang.String&nbsp;className)</code>
 <div class="block">Gets a given class within the target code with a given name</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static java.lang.Class&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#getClass-java.lang.String-java.lang.String-">getClass</a></span>(java.lang.String&nbsp;className,
         java.lang.String&nbsp;srcFolder)</code>
 <div class="block">Gets a given class within the target code with a given name</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../kchandra423/kTesting/KUtils.html#toString-java.lang.Object-">toString</a></span>(java.lang.Object&nbsp;o)</code>
+<div class="block">Better to string method that either calls an objects to string method or the respective Arrays.toString
+ method</div>
 </td>
 </tr>
 </table>
@@ -196,6 +211,30 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="callTests-java.lang.Class-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>callTests</h4>
+<pre>public static&nbsp;void&nbsp;callTests(java.lang.Class&lt;?&gt;&nbsp;testClass,
+                             java.lang.String&nbsp;functionName)
+                      throws java.lang.NoSuchMethodException,
+                             java.lang.reflect.InvocationTargetException,
+                             java.lang.IllegalAccessException</pre>
+<div class="block">Calls the given test within this class with the specified name. Testing methods
+ must be static, void, and take no parameters. They also can not be named main.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>testClass</code> - The class to call the tests from</dd>
+<dd><code>functionName</code> - The name of the function to be called</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.NoSuchMethodException</code> - If the method does not exist</dd>
+<dd><code>java.lang.reflect.InvocationTargetException</code> - If the method cannot be called</dd>
+<dd><code>java.lang.IllegalAccessException</code> - If the method cannot be called</dd>
+</dl>
+</li>
+</ul>
 <a name="getClass-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
@@ -212,14 +251,14 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The class with the given name</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - thrown if the class does not exist within the given folder</dd>
+<dd><code><a href="../../kchandra423/kTesting/kExceptions/KExistenceException.html" title="class in kchandra423.kTesting.kExceptions">KExistenceException</a></code> - thrown if the class does not exist within the given folder</dd>
 </dl>
 </li>
 </ul>
 <a name="getClass-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getClass</h4>
 <pre>public static&nbsp;java.lang.Class&lt;?&gt;&nbsp;getClass(java.lang.String&nbsp;className)</pre>
@@ -230,7 +269,24 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The class with the given name</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting">KExistenceException</a></code> - thrown if the class does not exist within the given folder</dd>
+<dd><code><a href="../../kchandra423/kTesting/kExceptions/KExistenceException.html" title="class in kchandra423.kTesting.kExceptions">KExistenceException</a></code> - thrown if the class does not exist within the given folder</dd>
+</dl>
+</li>
+</ul>
+<a name="toString-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;toString(java.lang.Object&nbsp;o)</pre>
+<div class="block">Better to string method that either calls an objects to string method or the respective Arrays.toString
+ method</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>o</code> - The object being used</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The string representation of that object.</dd>
 </dl>
 </li>
 </ul>
@@ -250,7 +306,8 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <ul class="navList" title="Navigation">
-<li><a href="../../kchandra423/kTesting/package-summary.html">Package</a></li>
+<li><a href="../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
 <li class="navBarCell1Rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
 <li><a href="../../deprecated-list.html">Deprecated</a></li>
@@ -260,7 +317,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../kchandra423/kTesting/KExistenceException.html" title="class in kchandra423.kTesting"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li>Prev&nbsp;Class</li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

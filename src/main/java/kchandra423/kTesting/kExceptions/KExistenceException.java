@@ -1,4 +1,4 @@
-package kchandra423.kTesting;
+package kchandra423.kTesting.kExceptions;
 
 import java.util.Arrays;
 
@@ -9,20 +9,39 @@ import java.util.Arrays;
  * @author Kumar Chandra
  */
 public class KExistenceException extends KException {
-
-    KExistenceException(String functionName, Class<?> c, Class<?>... parameters) {
+    /**
+     * Throws an exception for a method with the given parameters not existing
+     * @param functionName The name of the function
+     * @param c The class being used
+     * @param parameters The parameter types expected
+     */
+    public KExistenceException(String functionName, Class<?> c, Class<?>... parameters) {
         super(getFunctionNotFoundMessage(functionName, c, parameters));
     }
 
-    KExistenceException(Class<?> c, Class<?>... parameters) {
+    /**
+     * Throws an exception for a constructor within a class not existing
+     * @param c The class being used
+     * @param parameters The parameters of the constructor that could not be found
+     */
+    public KExistenceException(Class<?> c, Class<?>... parameters) {
         super(getConstructorNotFoundMessage(c, parameters));
     }
 
-    KExistenceException(Class<?> c, String fieldName) {
+    /**
+     * Throws ane exception for a field not being found within a class
+     * @param c The class being looked at
+     * @param fieldName The name of the field
+     */
+    public KExistenceException(Class<?> c, String fieldName) {
         super(getFieldNotFoundMessage(fieldName, c));
     }
 
-    KExistenceException(String className) {
+    /**
+     * Throws an exception for a class not being able to be loaded
+     * @param className The fully qualified name of the class
+     */
+    public KExistenceException(String className) {
         super(getClassNotFoundMessage(className));
     }
 

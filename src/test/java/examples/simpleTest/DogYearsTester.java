@@ -1,10 +1,10 @@
 package examples.simpleTest;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import kchandra423.kTesting.KUtils;
 
-import static kchandra423.kTesting.KAssertion.kAssertEquals;
+import java.lang.reflect.InvocationTargetException;
+
+import static kchandra423.kTesting.kAssertions.KAssert.kAssertEquals;
 
 
 public class DogYearsTester {
@@ -32,19 +32,7 @@ public class DogYearsTester {
 
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        String choice = args[0];
-        if (choice.equals("all")) {
-            Method[] methods = DogYearsTester.class.getMethods();
-            for (Method m :
-                    methods) {
-                if (!m.getName().equals("main") && Modifier.isPublic(m.getModifiers()) && Modifier.isStatic(m.getModifiers())) {
-                    m.invoke(null);
-                }
-            }
-        } else {
-            Method m = DogYearsTester.class.getMethod(choice);
-            m.invoke(null);
-        }
+        KUtils.callTests(DogYearsTester.class, null);
     }
 
 }

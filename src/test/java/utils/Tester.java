@@ -1,9 +1,9 @@
 package utils;
 
 public class Tester {
-    private int noPeeking;
-    private static int noLooking = 5;
     public static final String message = "hello!!";
+    private static final int noLooking = 5;
+    private int noPeeking;
 
     public Tester() {
         noPeeking = 0;
@@ -13,12 +13,12 @@ public class Tester {
         noPeeking = val;
     }
 
-    public boolean yes() {
-        return true;
-    }
-
     public static int gimme() {
         return 8;
+    }
+
+    public boolean yes() {
+        return true;
     }
 
     public boolean no() {
@@ -77,6 +77,19 @@ public class Tester {
 
     public String toString() {
         return "Example class!";
+    }
+
+    public void printSomething() {
+        System.out.println("Something!");
+    }
+
+    public void printThisThing(Object o) {
+        System.out.print("This is the thing!");
+        System.out.println(o.toString() + "\n");
+    }
+
+    public void printWeird() {
+        System.out.print("\n\t\n e\t");
     }
 
 
