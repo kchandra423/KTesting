@@ -10,7 +10,7 @@ import processing.core.PApplet;
  */
 public class Circle extends Shape {
     // private double x, y;//x and y of the center
-    private double radius;
+    private final double radius;
 
     /**
      * Creates a circle at 0,0 with a diameter of 10
@@ -93,11 +93,7 @@ public class Circle extends Shape {
         double sqrtdisc = Math.sqrt(disc);
         double t1 = (-b + sqrtdisc) / (2 * a);
         double t2 = (-b - sqrtdisc) / (2 * a);
-        if ((0 < t1 && t1 < 1) || (0 < t2 && t2 < 1)) {
-            return true;
-        }
-
-        return false;
+        return (0 < t1 && t1 < 1) || (0 < t2 && t2 < 1);
 
     }
 
@@ -111,11 +107,7 @@ public class Circle extends Shape {
         boolean answer;
 
 
-        if (PApplet.dist((float) getX(), (float) getY(), (float) other.getX(), (float) other.getY()) > other.getRadius() + getRadius()) {
-            answer = false;
-        } else {
-            answer = true;
-        }
+        answer = !(PApplet.dist((float) getX(), (float) getY(), (float) other.getX(), (float) other.getY()) > other.getRadius() + getRadius());
 
 
         return answer;
@@ -165,10 +157,7 @@ public class Circle extends Shape {
      * @return true if in or on circle
      */
     public boolean isPointInside(double x, double y) {
-        boolean answer = false;
-        if (PApplet.dist((float) this.getX(), (float) this.getY(), (float) x, (float) y) <= getRadius()) {
-            answer = true;
-        }
+        boolean answer = PApplet.dist((float) this.getX(), (float) this.getY(), (float) x, (float) y) <= getRadius();
 
         return answer;
     }

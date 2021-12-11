@@ -31,7 +31,7 @@ about the test.
 
 ### Example
 
-> `import static kchandra423.kTesting.KAssertion.kAssertTrue;`
+> `import static kchandra423.kTesting.kAssertions.KAssert.kAssertTrue;`
 >
 > `ArrayList<String> empty = new ArrayList<>();`  
 > `kAssertTrue("isEmpty", empty)` // Will print out success message  

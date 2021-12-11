@@ -1,6 +1,12 @@
 package kchandra423.kTesting;
 
+import kchandra423.kTesting.kExceptions.KExistenceException;
+
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 /**
  * Provides some basic utility methods to get classes within a project.
@@ -8,6 +14,21 @@ import java.io.File;
  * @author Kumar Chandra
  */
 public class KUtils {
+
+    public static void callTests(Class<?> testClass, String functionName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        if (functionName == null || functionName.equals("")) {
+            Method[] methods = testClass.getMethods();
+            for (Method m :
+                    methods) {
+                if (!m.getName().equals("main") && Modifier.isPublic(m.getModifiers()) && Modifier.isStatic(m.getModifiers())) {
+                    m.invoke(null);
+                }
+            }
+        } else {
+            Method m = testClass.getMethod(functionName);
+            m.invoke(null);
+        }
+    }
 
     /**
      * Gets a given class within the target code with a given name
@@ -66,5 +87,31 @@ public class KUtils {
             }
         }
         return null;
+    }
+
+    public static String toString(Object o) {
+        if (o.getClass().isArray()) {
+            if (o instanceof int[]) {
+                return Arrays.toString((int[]) o);
+            } else if (o instanceof float[]) {
+                return Arrays.toString((float[]) o);
+            } else if (o instanceof double[]) {
+                return Arrays.toString((double[]) o);
+            } else if (o instanceof long[]) {
+                return Arrays.toString((long[]) o);
+            } else if (o instanceof short[]) {
+                return Arrays.toString((short[]) o);
+            } else if (o instanceof boolean[]) {
+                return Arrays.toString((boolean[]) o);
+            } else if (o instanceof char[]) {
+                return Arrays.toString((char[]) o);
+            } else if (o instanceof byte[]) {
+                return Arrays.toString((byte[]) o);
+            } else {
+                return Arrays.toString((Object[]) o);
+            }
+        } else {
+            return o.toString();
+        }
     }
 }

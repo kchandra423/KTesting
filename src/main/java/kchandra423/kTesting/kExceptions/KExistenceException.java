@@ -1,4 +1,4 @@
-package kchandra423.kTesting;
+package kchandra423.kTesting.kExceptions;
 
 import java.util.Arrays;
 
@@ -10,19 +10,19 @@ import java.util.Arrays;
  */
 public class KExistenceException extends KException {
 
-    KExistenceException(String functionName, Class<?> c, Class<?>... parameters) {
+    public KExistenceException(String functionName, Class<?> c, Class<?>... parameters) {
         super(getFunctionNotFoundMessage(functionName, c, parameters));
     }
 
-    KExistenceException(Class<?> c, Class<?>... parameters) {
+    public KExistenceException(Class<?> c, Class<?>... parameters) {
         super(getConstructorNotFoundMessage(c, parameters));
     }
 
-    KExistenceException(Class<?> c, String fieldName) {
+    public KExistenceException(Class<?> c, String fieldName) {
         super(getFieldNotFoundMessage(fieldName, c));
     }
 
-    KExistenceException(String className) {
+    public KExistenceException(String className) {
         super(getClassNotFoundMessage(className));
     }
 
