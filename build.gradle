@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.kchandra423'
-version '1.4'
+version '1.5'
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = 'KTesting.jar'
+    archiveFileName = "KTesting"+"v$project.version"+".jar"
     destinationDirectory = 'dist' as File
 }
 
