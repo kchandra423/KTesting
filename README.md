@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/kchandra423/KTesting/tree/master.svg?style=svg)](https://circleci.com/gh/kchandra423/KTesting/tree/master)
 # KTesting
 
 A basic testing library for testing outputs of methods using reflection
