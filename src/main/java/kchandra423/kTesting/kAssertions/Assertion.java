@@ -8,7 +8,7 @@ interface Assertion {
         if (!Assertion.equals(expected, output)) {
             assertion.throwKAssertionException(output, expected);
         } else if (KAssert.successMessagesEnabled()) {
-            System.out.print(assertion.getSuccessMessage(expected));
+            System.out.println(assertion.getSuccessMessage(expected));
         }
     }
 
@@ -17,7 +17,7 @@ interface Assertion {
         for (Object val : expected) {
             if (equals(val, output)) {
                 if (KAssert.successMessagesEnabled()) {
-                    System.out.print(assertion.getSuccessMessage(expected));
+                    System.out.println(assertion.getSuccessMessage(expected));
                 }
                 return;
             }
