@@ -1,5 +1,7 @@
 [![CircleCI](https://circleci.com/gh/kchandra423/KTesting/tree/master.svg?style=svg)](https://circleci.com/gh/kchandra423/KTesting/tree/master)
 # KTesting
+[![](https://jitpack.io/v/kchandra423/KTesting.svg)](https://jitpack.io/#kchandra423/KTesting)
+
 
 A basic testing library for testing outputs of methods using reflection
 ***
